@@ -545,6 +545,46 @@ jQuery(document).ready(function() {
 		ifmore();
 	},300)
 
+	/* KREAM-style mobile menu: current category highlight */
+	(function(){
+		function extractCateNo(url){
+			if (!url) return null;
+			try {
+				// query: ?cate_no=48
+				var m = url.match(/[?&]cate_no=(\d+)/);
+				if (m && m[1]) return m[1];
+				// seo-like: /category/NAME/48/ or /category/48/
+				m = url.match(/\/category\/[^\/]*\/(\d+)\//) || url.match(/\/category\/(\d+)\//);
+				if (m && m[1]) return m[1];
+				// some skins: /(\d+)\/category/
+				m = url.match(/\/(\d+)\/category\//);
+				if (m && m[1]) return m[1];
+			} catch (e) {}
+			return null;
+		}
+
+		function highlightKreamMenu(){
+			var current = extractCateNo(window.location.href);
+			if (!current) return;
+			var $items = jQuery('.kream_menu__item');
+			if (!$items.length) return;
+			$items.removeClass('selected').find('.kream_menu__link').removeAttr('aria-current');
+			$items.each(function(){
+				var $link = jQuery(this).find('.kream_menu__link').first();
+				var target = extractCateNo($link.attr('href'));
+				if (target && String(target) === String(current)) {
+					jQuery(this).addClass('selected');
+					$link.attr('aria-current','page');
+					return false;
+				}
+			});
+		}
+
+		// Run once now, and once after possible async DOM changes
+		highlightKreamMenu();
+		setTimeout(highlightKreamMenu, 200);
+	})();
+
 	/* 상단 카테고리 변경 감지 */
 	top_category(); // 상단카테고리
 	observeTopCategory(); // 상단카테고리 변경 감지

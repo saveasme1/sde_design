@@ -136,11 +136,11 @@
    KREAM-style mobile header/footer
    (mobile only)
 ================================ */
-/* Only apply on touch/mobile devices (prevents desktop narrow-window)
-   - Some mobile browsers don't match hover:none reliably.
-   - Use pointer:coarse primarily, keep hover:none as fallback.
-*/
-@media (max-width:768px) and (pointer:coarse){
+/* Default: hide the mobile menu bar on desktop */
+.kream_menu{display:none;}
+
+/* Mobile layout (also applies when PC window is narrow) */
+@media (max-width:768px){
   /* Hide extra header items, keep logo row sticky behavior */
   #header .inner .top_nav_box [data-ez-module='menu-main/1'],
   #header .inner .top_nav_box .top_mypage,
@@ -266,168 +266,46 @@
     box-shadow:0 0 0 2px rgba(17,17,17,.12);
   }
 
-  /* Bottom nav: modern tab bar */
-  .bottom-nav{
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    z-index:120;
+  /* KREAM-like horizontal menu under search */
+  .kream_menu{
+    display:block;
+    width:100%;
     background:#fff;
-    border-top:1px solid rgba(0,0,0,.08);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  .bottom-nav__tabBar{
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    margin:0;
-    padding:8px 4px;
-    list-style:none;
-  }
-  .bottom-nav__tabBar a,
-  .bottom-nav__tabBar button{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:4px;
-    border:0;
-    background:transparent;
-    color:#111;
-    font-size:11px;
-    line-height:1;
-    padding:6px 8px;
-  }
-  .bottom-nav__tabBar svg{
-    width:20px;
-    height:20px;
-  }
-
-  /* prevent content hidden behind bottom bar */
-  #wrap{
-    padding-bottom:72px;
-  }
-}
-
-@media (max-width:768px) and (hover:none){
-  /* Hide extra header items, keep logo row sticky behavior */
-  #header .inner .top_nav_box [data-ez-module='menu-main/1'],
-  #header .inner .top_nav_box .top_mypage,
-  #header .inner .top_nav_box .top_sidebar{
-    display:none !important;
-  }
-
-  /* Show Cafe24 search module under the sticky logo row */
-  #quick_search{
-    display:block !important;
-    position:relative !important; /* now inside #header, so it follows header fixed */
-    top:auto;
-    width:100% !important;
-    padding:8px 12px 10px;
-    margin:0;
-    background:#fff;
-    z-index:1;
     border-bottom:1px solid rgba(0,0,0,.06);
   }
-  /* one-row layout: search left / icons right */
-  #quick_search{
-    display:flex !important;
-    align-items:center;
-    gap:10px;
-  }
-  #quick_search .xans-layout-searchheader{
-    flex:1 1 auto;
-    min-width:0;
-    max-width:none;
-  }
-  #quick_search .quick_searchClose{
-    display:none !important;
-  }
-  /* 강제 리셋: 기존 검색모듈 기본 스타일(큰 폰트/높이) 방지 */
-  #quick_search .xans-layout-searchheader{
-    position:static !important;
-    left:auto !important;
-    right:auto !important;
-    height:auto !important;
-    margin:0 !important;
-    border:0 !important;
-    overflow:visible !important;
-  }
-  #quick_search .xans-layout-searchheader fieldset{
+  .kream_menu__list{
     display:flex;
+    gap:14px;
     align-items:center;
-    gap:8px;
-    border:1px solid #e5e7eb;
-    background:#f6f7f8;
-    border-radius:7px;
-    padding:6px 10px;
-    width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    white-space:nowrap;
+    padding:10px 12px 12px;
     margin:0;
-    height:36px;          /* keep shape on focus/typing */
-    box-sizing:border-box;
-    overflow:hidden;
+    list-style:none;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
   }
-  #quick_search .xans-layout-searchheader input[type="text"],
-  #quick_search .xans-layout-searchheader input[type="search"]{
-    flex:1 1 auto;
-    border:0;
-    outline:0;
-    background:transparent;
-    height:24px;          /* prevent vertical growth */
-    line-height:24px;
-    font-size:16px;       /* avoid iOS zoom + layout jump */
-    min-width:0;
-    padding:0;
-  }
-  #quick_search .xans-layout-searchheader .btnDelete{
-    display:block;
-    flex:0 0 auto;
-    width:18px;
-    height:18px;
-    margin:0 2px 0 0;
-    background-size:12px;
-  }
-  #quick_search .xans-layout-searchheader .search_btn{
-    width:18px;
-    height:18px;
-    margin-left:2px;
-    flex:0 0 auto;
-  }
-
-  #quick_search .quick_search__util{
-    margin-left:auto;
-    display:flex;
+  .kream_menu__list::-webkit-scrollbar{display:none;}
+  .kream_menu__item{flex:0 0 auto;}
+  .kream_menu__link{
+    display:inline-flex;
     align-items:center;
-    gap:12px;
-    flex:0 0 auto;
+    height:28px;
+    padding:0 2px;
+    color:#111;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:-.2px;
+    text-decoration:none;
+    opacity:.88;
+    border-bottom:2px solid transparent;
   }
-  #quick_search .quick_search__icon{
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:34px;
-    height:34px;
-  }
-  #quick_search .quick_search__icon svg{
-    width:22px;
-    height:22px;
-  }
-  #quick_search .quick_search__cart .count{
-    position:absolute;
-    top:2px;
-    right:2px;
-    min-width:16px;
-    height:16px;
-    border-radius:999px;
-    background:#111;
-    color:#fff;
-    font-size:10px;
-    line-height:16px;
-    text-align:center;
-    padding:0 4px;
-    box-sizing:border-box;
+  .kream_menu__link:hover{opacity:1;}
+  .kream_menu__item.selected .kream_menu__link,
+  .kream_menu__link[aria-current="page"]{
+    opacity:1;
+    border-bottom-color:#111;
   }
 
   /* Bottom nav: modern tab bar */
