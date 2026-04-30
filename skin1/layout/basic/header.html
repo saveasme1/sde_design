@@ -1,0 +1,81 @@
+<div class="main_top_banner ez-align-right" data-ez-module="top-banner" data-ez-align="right" data-ez-role="style.color" data-ez-display="visible" data-ez="contents-0q97ueu-1">
+        <div class="top_banner_box_inner">
+            <div class="top_banner_text">
+                <a data-ez-role="a" href="#" data-href="#" target="_self" style="color: rgb(255, 255, 255); font-weight: normal;">회원가입 이벤트 : 초보 집사들에게 5,000원 적립금</a>
+            </div>
+    
+            <div class="top_banner_close" data-ez-role="close">
+                <input type="checkbox" name="chkbox" id="top_banner_box_cloase" value="1" data-ez-role="disable-term">
+                <label for="top_banner_box_cloase" data-ez-role="disable-text">오늘 하루 보지 않기</label>
+                <i aria-hidden="true" class="icon icoClose white">닫기</i>
+            </div>
+        </div>
+    </div>
+<header id="header" class="layout04" data-ez-layout="layout00" data-ez="contents-15qtcca-1" style="margin-bottom: 386px;">
+        <ez-prop data-version="1.0.0" type="layout">
+            <ez-var data-prop="layout" data-namespace="ez.layout.header.layout" data-type="array">
+                <ez-item data-id="layout00" data-name="1단 기본형"></ez-item>
+                <ez-item data-id="layout01" data-name="1단 로고 중앙형"></ez-item>
+                <ez-item data-id="layout04" data-name="2단 좌측형"></ez-item>
+                <ez-item data-id="layout02" data-name="2단 혼합형"></ez-item>
+                <ez-item data-id="layout03" data-name="2단 중앙형"></ez-item>
+            </ez-var>
+        </ez-prop>
+
+        <div class="inner">
+            <div class="toparea display_pc_only">
+                <div class="toparea_shoppinginfo">
+                    <div module="Layout_multishopList">
+                        <button type="button" class="toggle">{$current_language} <i aria-hidden="true" class="icon icoArrowBottom"></i></button>
+                        <ul module="Layout_multishopListitem">
+                            <li class="{$selected_class}">
+                                <a href="//{$shop_domain}/">{$locale_language}</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div data-ez-group="shopping-info" data-ez-role="list">
+                        <ul module="Layout_shoppingInfo">
+                            <li class="{$use_mileage|display}"><a href="/myshop/mileage/historyList.html">{$mileage_name} <strong>{$mileage}</strong></a></li>
+                            <li class="{$use_deposit|display}"><a href="/myshop/deposits/historyList.html">{$deposit_name} <strong>{$deposit}</strong></a></li>
+                            <li class="{$use_coupon_cnt|display}"><a href="/myshop/coupon/coupon.html">쿠폰 <strong>{$coupon_cnt}</strong></a></li>
+                            <li class="{$use_interest_prd|display}"><a href="/myshop/wish_list.html">관심상품 <strong>{$interest_prd_cnt}</strong></a></li>
+                            <li class="{$use_like_product_cnt|display}">{$like_prd_tag}</li>
+                            <li class="{$use_basket_cnt|display}"><a href="/order/basket.html">장바구니 <strong>{$basket_cnt}<span class="{$use_basket_price|display}">({$basket_price})</span></strong></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="toparea_state" data-ez-group="top-util-menu" data-ez-role="list">
+                    <a data-ez-item="join" module="Layout_statelogoff" href="/member/agreement.html">회원가입</a>
+                    <a data-ez-item="login" module="Layout_statelogoff" href="/member/login.html">로그인</a>
+                    <a data-ez-item="modify" module="Layout_stateLogon" href="/member/modify.html">내정보수정</a>
+                    <a data-ez-item="logout" module="Layout_stateLogon" href="{$action_logout}">로그아웃</a>
+                    <a data-ez-item="order" href="/myshop/order/list.html">주문조회</a>
+                    <a data-ez-item="mypage" module="Layout_stateLogon" href="/myshop/index.html">마이페이지</a>
+                    <a data-ez-item="recent" href="/product/recent_view_product.html">최근본상품</a>
+                    <div class="toparea_state_board">
+                        <a data-ez-item="board" href="#none">고객센터<i aria-hidden="true" class="icon icoArrowBottom"></i></a>
+                        <ul module="Layout_BoardInfo">
+                            <li><a href="{$link_board_list}">{$board_name}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 첫 번째 행: 로고와 마이페이지 -->
+            <div class="top_nav_row">
+                <div class="top_nav_column logo-column">
+                    <div class="top_logo" module="Layout_LogoTop">
+                        <a href="/"><img src="https://fullyfull2024.cafe24.com/web/upload/LOGO_ZERON.png" alt="{$mall_name}"></a>
+                    </div>
+                </div>
+                <!-- <div class="top_nav_column mypage-column">
+                    <div class="top_mypage">
+                        <a href="javascript:;" class="eSearch"><!--@import(/svg/icon-search.html)-->
+                        <a href="/myshop/index.html"><!--@import(/svg/icon-user.html)--></a>
+                        <a href="/order/basket.html" module="Layout_orderBasketcount"><!--@import(/svg/icon-cart.html)--><span class="count {$basket_count_display|display} {$basket_count_display_class}"><span class="{$basket_count_class}">{$basket_count}</span></span></a>
+                    </div>
+                </div> --&gt;
+            </header>
+<!--#ez="1/15"-->

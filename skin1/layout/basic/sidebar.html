@@ -1,0 +1,39 @@
+<aside id="aside" module="layout_slidePackage" data-ez="contents-1jl9e4l-1">
+<!--@css(/layout/basic/css/slideMenu.css)-->
+<!--@js(/layout/basic/js/slide_menu.js)-->
+<nav class="navigation-menu" role="navigation">
+<div class="top_logo" module="Layout_LogoTop"><a href="/"><img src="{$logo}" alt="{$mall_name}"></a></div>
+<div class="navigation-menu__member" data-ez-group="top-util-menu" data-ez-role="list">
+<a data-ez-item="join" href="/member/agreement.html" module="Layout_statelogoff">회원가입</a>
+<a data-ez-item="login" href="/member/login.html" module="Layout_statelogoff">로그인</a>
+<a data-ez-item="modify" href="/member/modify.html" module="Layout_stateLogon">내정보수정</a>
+<a data-ez-item="logout" href="{$action_logout}" module="Layout_stateLogon">로그아웃</a>
+<a data-ez-item="order" href="/myshop/order/list.html">주문조회</a>
+<a data-ez-item="mypage" href="/myshop/index.html" module="Layout_stateLogon">마이페이지</a>
+<a data-ez-item="recent" href="/product/recent_view_product.html">최근본상품</a>
+</div><!-- //navigation_state -->
+<div data-ez-module="menu-side/1"><div id="slideCateList" class="navigation-menu__category">
+  <ul id="slide_add_category"><li><a href="/category/%ED%95%84%EA%B8%B0%EB%8F%84%EA%B5%AC/42/" class="view">필기도구</a><ul class="sub_cate01"><li><a href="/category/%EC%A4%91%EB%B6%84%EB%A5%981/47/" class="view">중분류1</a></li><li><a href="/category/%EC%A4%91%EB%B6%84%EB%A5%982/48/" class="view">중분류2</a><ul class="sub_cate02"><li><a href="/category/%EC%86%8C%EB%B6%84%EB%A5%981/49/" class="view">소분류1</a></li><li><a href="/category/%EC%86%8C%EB%B6%84%EB%A5%982/50/" class="view">소분류2</a><ul class="sub_cate03"><li><a href="/category/%EC%83%81%EC%84%B8%EB%B6%84%EB%A5%981/51/" class="view">상세분류1</a></li><li><a href="/category/%EC%83%81%EC%84%B8%EB%B6%84%EB%A5%982/52/" class="view">상세분류2</a></li></ul></li></ul></li></ul></li><li><a href="/category/%EB%85%B8%ED%8A%B8%EC%88%98%EC%B2%A9/43/" class="view">노트/수첩</a></li><li><a href="/category/%EC%9A%A9%EC%A7%80/44/" class="view">용지</a></li><li><a href="/category/%EC%B1%85%EC%83%81%EC%9A%A9%ED%92%88/45/" class="view">책상용품</a></li><li><a href="/category/%EA%B8%B0%ED%83%80/46/" class="view">기타</a></li></ul>
+  </div></div><!-- //menu-side/1 -->
+<div class="navigation-menu__board" module="Layout_BoardInfo">
+<div class="title">고객센터<button class="icoCategory" type="button">펼침</button></div>
+<ul class="categoryList">
+<li class="menu"><a href="{$link_board_list}">{$board_name}</a> {$board_adult_icon}</li>
+<li class="menu"><a href="{$link_board_list}">{$board_name}</a> {$board_adult_icon}</li>
+</ul>
+</div><!-- //tab_community -->
+<div module="Layout_multishopList">
+<button class="toggle" type="button">{$current_language} <i aria-hidden="true" class="icon icoArrowBottom"></i></button>
+<ul module="Layout_multishopListitem">
+<li class="{$selected_class}">
+<a href="//{$shop_domain}/">{$locale_language}</a>
+</li>
+<li class="{$selected_class}">
+<a href="//{$shop_domain}/">{$locale_language}</a>
+</li>
+</ul>
+</div>
+</nav>
+<button class="btnClose" type="button"><img alt="닫기" src="/SkinImg/img/sldiebar_close.svg"></button>
+</aside>
+<!--#ez="1/4"-->

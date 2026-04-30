@@ -1,0 +1,441 @@
+#zeron_wrap {
+  /* 폰트(레귤러 통일, 제목만 볼드) */
+  font-family: "GmarketSans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+@import url('https://cdn.jsdelivr.net/gh/leetaewook/gmarket-sans-dynamic-subset/GmarketSans.css');
+
+#zeron_wrap {
+  width:100%;
+  overflow:hidden;
+}
+
+/* 상단 띠 */
+.zeron-bar {
+  background:#004486;
+  overflow:hidden;
+}
+.zeron-marquee {
+  overflow:hidden;
+  width:100%;
+  white-space:nowrap;
+  display:block;
+}
+.zeron-marquee-track {
+  display:inline-flex;
+  flex-wrap:nowrap !important;
+  align-items:center;
+  will-change:transform;
+  transform:translate3d(0,0,0);
+  animation:zeron_move 15s linear infinite;
+}
+.zeron-marquee-group {
+  display:inline-flex;
+  flex-wrap:nowrap !important;
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+.zeron-marquee span {
+  color:#fff;
+  /* 원래 디자인 유지 + 높이/글자만 축소 */
+  padding:4px 40px; /* 10px -> 약 40% 수준으로 얇게 */
+  flex:0 0 auto;
+  display:inline-block;
+  font-size:11px;
+}
+
+/* 슬라이더 */
+#zeron_slider {
+  position:relative;
+  width:100%; /* PC: 가로 전체 확장 */
+  margin:18px 0 44px; /* PC: 아래 요소와 간격 확보 */
+  /* PC: 고정 높이 */
+  height:410px;
+  aspect-ratio:auto;
+  overflow:visible;
+}
+
+/* 뷰포트/트랙 */
+.zs_viewport{
+  /* PC: 중앙 슬라이드 폭 축소 + 간격 축소(좌/우 더 노출) */
+  --zs-slide-width: min(800px, 54%);
+  --zs-gap: 8px;
+
+  width:100%;
+  margin:0;
+  height:100%;
+  overflow:visible; /* 그림자/라운드가 잘리지 않게 */
+  border-radius:20px;
+  background:transparent; /* 배경색 제거(완전 투명) */
+  padding:0 24px; /* 풀폭에서 양끝 여백 */
+  box-sizing:border-box;
+  /* 3D depth */
+  perspective:900px;
+  perspective-origin:50% 50%;
+}
+.zs_track{
+  height:100%;
+  display:flex;
+  gap:var(--zs-gap);
+  align-items:center;
+  will-change:transform;
+  transform:translate3d(0,0,0);
+  transition:transform .45s ease;
+  transform-style:preserve-3d;
+  touch-action:pan-y;
+  user-select:none;
+}
+
+/* 슬라이드 */
+.zs_slide {
+  flex:0 0 auto;
+  width:var(--zs-slide-width);
+  height:100%;
+  border-radius:20px;
+  overflow:hidden;
+  /* 텍스트 선명도 유지: 슬라이드 자체는 transform 사용하지 않음 */
+  transform:none;
+  transform-style:flat;
+  transition:filter .25s ease;
+  position:relative;
+  transform-origin:center center;
+  filter:brightness(.95);
+}
+.zs_slide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  /* PC/모바일: 덮이는 그림자/반사 제거 */
+  background:none;
+  opacity:0;
+}
+.zs_slide.is-prev{
+  filter:brightness(.90);
+}
+.zs_slide.is-next{
+  filter:brightness(.90);
+}
+.zs_slide.is-active{
+  filter:brightness(1.03);
+  transform:none;
+}
+.zs_slide picture,
+.zs_slide img{
+  display:block;
+  width:100%;
+  height:100%;
+  transform:scale(1);
+  transition:transform .55s cubic-bezier(.2,.8,.2,1);
+}
+.zs_slide img {
+  object-fit:cover;
+}
+.zs_slide.is-active picture,
+.zs_slide.is-active img{
+  transform:scale(1);
+}
+
+/* 각 슬라이드에 링크를 걸 수 있도록 */
+.zs_slide_link{
+  position:absolute;
+  inset:0;
+  z-index:10;
+  display:block;
+}
+
+/* PC에서만: 간격/겹침 없이 "활성 슬라이더"만 크게 (transform 금지) */
+@media (min-width:1025px){
+  #zeron_slider{
+    margin-top:26px; /* 상단 Where 영역과 겹침 방지 */
+  }
+
+  .zs_viewport{
+    --zs-gap: 12px; /* 간격을 조금 더 넓게(PC만) */
+    --zs-slide-width: min(800px, 54%);
+  }
+
+  /* PC: 활성은 높이 100%, 비활성은 90%로 돋보이게(간격/폭은 동일) */
+  .zs_slide{ height:100%; }
+  .zs_slide:not(.is-active){ height:90%; }
+}
+
+/* 슬라이드 텍스트(소제목/제목/한글 설명) */
+.zs_caption{
+  position:absolute;
+  left:75px; /* PC: 왼쪽/위로 2배 더 (오프셋 절반) */
+  top:66px;
+  z-index:3;
+  color:#fff;
+  text-shadow:0 1px 10px rgba(0,0,0,.30);
+  letter-spacing:-0.2px;
+  text-rendering:geometricPrecision;
+  -webkit-font-smoothing:antialiased;
+}
+.zs_caption_sub{
+  font-size:14px; /* PC: 1/2 (28px -> 14px) */
+  line-height:1.2;
+  opacity:.95;
+}
+.zs_caption_title{
+  margin-top:6px;
+  font-size:38px; /* PC: 1/2 (76px -> 38px) */
+  line-height:1.15;
+  font-weight:700; /* 두번째 줄(영문 제목)만 볼드 */
+}
+.zs_caption_desc{
+  margin-top:12px; /* PC: 2~3번째 줄 간격 확대 */
+  font-size:13.5px; /* PC: 한글 1.5배 (9px -> 13.5px) */
+  line-height:1.25;
+  opacity:.95;
+  font-weight:400;
+}
+
+/* 태블릿 */
+@media (min-width:721px) and (max-width:1024px){
+  #zeron_slider{
+    height:auto;
+    aspect-ratio: 16 / 8; /* 태블릿: 세로 여유를 조금 확보 */
+  }
+
+  .zs_viewport{
+    --zs-slide-width: 86%;
+    padding:0 18px;
+    border-radius:20px;
+  }
+
+  .zs_caption{
+    left:50%;
+    top:54px;
+    transform:translateX(-50%);
+    width:min(92%, 680px);
+    text-align:center;
+  }
+
+  .zs_caption_sub{
+    font-size:calc(0.6 * clamp(12px, 2.2vw, 18px)); /* 태블릿: 60% */
+    line-height:1.25;
+  }
+
+  .zs_caption_title{
+    margin-top:6px;
+    font-size:calc(0.6 * clamp(28px, 5.2vw, 52px)); /* 태블릿: 60% */
+    line-height:1.12;
+  }
+
+  .zs_caption_desc{
+    margin-top:10px;
+    font-size:calc(0.6 * clamp(14px, 2.6vw, 24px)); /* 태블릿: 60% */
+    line-height:1.25;
+  }
+}
+
+/* 상단 텍스트 가독성(상단만 살짝 어둡게) */
+.zs_slide::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:none; /* 덮이는 그림자 제거 */
+  pointer-events:none;
+}
+
+/* 페이지네이션(1/총) */
+.zs_paging{
+  position:absolute;
+  left:50%;
+  bottom:14px; /* 슬라이더(이미지) 위 하단 중앙 */
+  transform:translateX(-50%);
+  z-index:5;
+  display:inline-flex;
+  gap:6px;
+  align-items:center;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(0,0,0,.45);
+  color:#fff;
+  font-size:12px;
+  line-height:1;
+  backdrop-filter: blur(6px);
+}
+.zs_paging_sep{ opacity:.7; }
+.zs_paging_prev,
+.zs_paging_next{
+  border:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  line-height:1;
+  padding:2px 6px;
+  cursor:pointer;
+}
+.zs_paging_prev:focus-visible,
+.zs_paging_next:focus-visible{
+  outline:2px solid rgba(255,255,255,.8);
+  outline-offset:2px;
+  border-radius:999px;
+}
+
+/* 벌릿(원형 도트) 페이지네이션 */
+.zs_bullets{
+  position:absolute;
+  left:50%;
+  bottom:40px; /* PC: 아래로 내려서 숫자와 간격 축소 */
+  transform:translateX(-50%);
+  z-index:5;
+  display:inline-flex;
+  gap:14px; /* 원형 간격 확대 */
+  align-items:center;
+  padding:4px 10px; /* 굵기(세로 두께) 얇게 */
+  border-radius:999px;
+  background:rgba(0,0,0,.45); /* 숫자 페이지네이션과 동일 */
+  backdrop-filter: blur(6px);
+}
+.zs_bullet{
+  width:6px;
+  height:6px;
+  border-radius:999px;
+  border:0;
+  padding:0;
+  background:rgba(255,255,255,.55);
+  cursor:pointer;
+  transition:transform .2s ease, background-color .2s ease, opacity .2s ease;
+  position:relative; /* 터치 영역 확장용 */
+}
+.zs_bullet::after{
+  /* 보이는 크기는 유지하면서 클릭/터치 영역만 확장 */
+  content:"";
+  position:absolute;
+  inset:-10px;
+}
+.zs_bullet:hover{ background:rgba(255,255,255,.75); }
+.zs_bullet.is-active{
+  background:#fff;
+  transform:scale(1.2);
+}
+
+/* 활성 슬라이드 전환(전체: 모바일 포함) - 과하지 않게 */
+@keyframes zs_active_pop {
+  0% { filter:brightness(1); }
+  100% { filter:brightness(1.03); }
+}
+.zs_slide.is-active{
+  animation:zs_active_pop .35s ease-out;
+}
+
+/* 모바일 */
+@media (max-width:768px){
+  #zeron_slider {
+    /* 모바일: 중앙 크게 + 좌/우 일부 노출(복원) */
+    width:min(600px, calc(100vw - 32px)) !important;
+    margin:14px auto 26px; /* 모바일: 아래 요소와 간격 확보 */
+    /*
+      모바일 정사각형 기준은 "슬라이드"입니다.
+      기존에는 컨테이너(#zeron_slider)만 정사각형 높이로 고정되고,
+      슬라이드(.zs_slide)는 width(%) + height(100%) 조합이라 직사각형이 되는 문제가 있었습니다.
+    */
+    height:auto !important;
+    aspect-ratio:auto;
+    display:block;
+  }
+
+  .zs_viewport{
+    /* 모바일: 크기 체감 크게 + 간격 축소 */
+    --zs-slide-width: 93%;
+    --zs-gap: 0px;
+
+    width:100%;
+    margin:0;
+    height:auto !important;
+    border-radius:18px; /* 모바일: 50 적용 취소(원복) */
+    padding:0 3px;
+  }
+
+  .zs_track{
+    align-items:stretch;
+    transition:transform .35s ease;
+  }
+
+  .zs_slide{
+    border-radius:18px; /* 모바일: 50 적용 취소(원복) */
+    transform:none;
+    height:auto !important;
+    aspect-ratio: 1 / 1; /* 모바일: 활성/비활성 모두 정사각형 */
+  }
+  /* 모바일: 비활성(좌/우)만 87% 정도로 줄여 활성 강조 */
+  /* gap이 0이어도 scale 때문에 시각적 간격이 생겨서, 안쪽으로 살짝 당겨줌 */
+  .zs_slide.is-next{ transform:translateX(-5%) scale(.87); filter:brightness(.90); }
+  .zs_slide.is-prev{ transform:translateX(5%) scale(.87); filter:brightness(.90); }
+  .zs_slide.is-active{
+    transform:none;
+    clip-path: inset(0 round 18px);
+  }
+  .zs_slide.is-active picture,
+  .zs_slide.is-active img{
+    transform:scale(1); /* 모바일: 활성 확대 제거 */
+  }
+
+  .zs_paging{
+    bottom:10px;
+    padding:5px 9px;
+    font-size:11px;
+  }
+
+  /* 벌릿 페이지네이션은 사용하지 않음 */
+  .zs_bullets{ display:none !important; }
+
+  .zs_caption{
+    left:16px;
+    top:24px;
+  }
+  .zs_caption_sub{ font-size:11px; }
+  .zs_caption_title{ font-size:18px; }
+  .zs_caption_desc{ margin-top:6px; font-size:12px; } /* 모바일: 기존 간격 유지 */
+}
+
+/* 모션 최소화 선호 시 3D/애니메이션 완화 */
+@media (prefers-reduced-motion: reduce){
+  .zs_track{ transition:none; }
+  .zs_slide{ transition:none; transform:scale(.98); filter:brightness(1); }
+  .zs_slide.is-active{ animation:none; transform:scale(1); }
+}
+
+/* 애니메이션 */
+@keyframes zeron_move {
+  0% { transform:translateX(0) translateZ(0); }
+  100% { transform:translateX(-50%) translateZ(0); }
+}
+
+@media (max-width:720px){
+  .zeron-marquee-track {
+    align-items:center;
+  }
+
+  .zeron-marquee span {
+    white-space:nowrap;
+  }
+}
+
+
+@media (max-width:720px){
+
+  .zeron-bar {
+    height:22px;
+    display:flex;
+    align-items:center;
+  }
+
+  .zeron-marquee {
+    height:22px;
+    line-height:22px;
+    overflow:hidden;
+  }
+
+  .zeron-marquee span {
+    white-space:nowrap;
+    display:inline-block;
+    padding:0 18px; /* 줄어든 높이에 맞게 패딩 축소 */
+    line-height:22px;
+    font-size:10px;
+  }
+
+}

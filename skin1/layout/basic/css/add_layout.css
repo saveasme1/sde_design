@@ -1,0 +1,244 @@
+/* 기존의 주석: 상단 하단 레이아웃 */
+@media all and (min-width:1024px) {
+
+    /* 레이아웃 1번 */
+    #header.layout01 .inner .top_nav_box {
+        position:relative;
+    }
+    #header.layout01 .inner .top_nav_box .top_logo {
+        order:2;
+        display:flex;
+        justify-content:center;
+        margin:0 auto;
+    }
+    #header.layout01 .inner .top_nav_box .top_category {
+        order:1;
+        margin:0;
+    }
+    #header.layout01 .inner .top_nav_box .top_category > ul:first-child > li {
+        padding-left:0;
+    }
+    #header.layout01 .inner .top_nav_box .top_mypage {
+        order:3;
+        position:static;
+        padding-left:40px;
+    }
+
+    /* 레이아웃 2번 */
+    #header.layout02 .inner .top_nav_box {
+        position:relative;
+        flex-wrap:wrap;
+    }
+    #header.layout02 .inner .top_nav_box .top_logo {
+        order:1;
+        flex-basis:100%;
+        height:60px;
+        display:flex;
+        justify-content:center;
+    }
+    #header.layout02 .inner .top_nav_box div[data-ez-module='menu-main/1'] {
+        order:2;
+        width:100%;
+        margin:0 0 0 190px;
+    }
+    #header.layout02 .inner .top_nav_box .top_category {
+        margin:0;
+    }
+    #header.layout02 .inner .top_nav_box .top_category > ul {
+        justify-content:flex-end;
+        margin-left:auto;
+    }
+    #header.layout02 .inner .top_nav_box .top_category > ul > li {
+        padding:0 0 0 50px;
+    }
+    #header.layout02 .inner .top_nav_box .top_category li.on .sub_cate01,
+    #header.layout02 .inner .top_nav_box .top_category .sub-category {
+        left:25px;
+    }
+    #header.layout02 .inner .top_nav_box .top_mypage {
+        top:60px;
+        left:0;
+        right:auto;
+        margin:0;
+        padding:0 40px 0 0;
+    }
+
+    /* 레이아웃 3번 */
+    #header.layout03 .inner .toparea {
+        flex-direction:row;
+    }
+    #header.layout03 .inner .top_nav_box {
+        flex-direction:column;
+        align-items:center;
+    }
+    #header.layout03 .inner .top_nav_box .top_logo {
+        order:2;
+        flex-basis:auto;
+        display:flex;
+        justify-content:flex-start;
+    }
+    #header.layout03 .inner .top_nav_box div[data-ez-module='menu-main/1'] {
+        order:3;
+        flex-basis:auto;
+    }
+    #header.layout03 .inner .top_nav_box .top_category {
+        margin:0;
+    }
+    #header.layout03 .inner .top_nav_box .top_category > ul > li > a {
+        line-height:71px;
+    }
+    #header.layout03 .inner .top_nav_box .top_category .sub-category {
+        top:77px;
+        left:-11px;
+    }
+    #header.layout03 .inner .top_nav_box .top_mypage {
+        top:60px;
+        height:80px;
+    }
+    #header.layout03 .inner .top_nav_box .top_mypage .xans-layout-multishoplist ul {
+        top:54px;
+    }
+
+    /* 레이아웃 4번 */
+    #header.layout04 .inner .top_nav_box {
+        position:relative;
+        flex-direction:row;
+        justify-content:space-between;
+    }
+    #header.layout04 .inner .top_nav_box .top_logo {
+        order:1;
+        display:flex;
+        justify-content:flex-start;
+        height:60px;
+    }
+    #header.layout04 .inner .top_nav_box div[data-ez-module='menu-main/1'] {
+        order:2;
+        margin:0 190px 0 0;
+    }
+    #header.layout04 .inner .top_nav_box .top_category {
+        order:3;
+        margin:0;
+        flex-grow:1;
+        display: flex;
+        justify-content: space-between;
+    }
+    #header.layout04 .inner .top_nav_box .top_category .left-menu,
+    #header.layout04 .inner .top_nav_box .top_category .right-menu {
+        display: flex;
+    }
+    #header.layout04 .inner .top_nav_box .top_category > ul:first-child > li {
+        padding-left:0px;
+    }
+    #header.layout04.fixed .inner .top_nav_box .top_logo {
+        margin-top: 10px;
+        display: block; /* sticky를 block으로 변경 */
+        height: 100px;
+    }
+
+    #header.layout04 .toparea {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        background-color: #ffffff;
+    }
+    
+    #header.layout04 .toparea.display_pc_only {
+        /* position: fixed; */
+        top: 0;
+        max-width: 1574px;
+        z-index: 999;
+        background-color: #ffffff;
+    }
+    
+    #header.layout04 .top_nav_row {
+        margin-top: 0px; /* .toparea.display_pc_only 요소의 높이만큼 조정 */
+    }
+
+
+    /* 새로운 스타일 추가 */
+@media only screen and (min-width: 1024px) {
+    #header.fixed .inner {
+        display: flex;
+        justify-content: space-between; /* 내부 요소들의 정렬 조정 */
+        align-items: center;
+    }
+    
+    #header.fixed .toparea {
+        width: 100%;
+        display: flex;
+        justify-content: space-between; /* 내부 요소들의 정렬 조정 */
+        align-items: center;
+    }
+
+    #header.fixed .toparea.display_pc_only {
+        position: fixed;
+        top: 0;
+        max-width: 1574px;
+        z-index: 999;
+        background-color: #ffffff;
+    }
+
+    #header.fixed .top_nav_row {
+        margin-top: 50px; /* .toparea.display_pc_only 요소의 높이만큼 조정 */
+    }
+
+    #header.fixed .top_nav_row .top_nav_column {
+        display: flex;
+        align-items: center; /* 내부 요소들의 정렬 조정 */
+        justify-content: space-between;
+    }
+}
+
+
+
+
+
+    #footer.layout04 {
+        display:flex;
+        flex-direction: column;
+    }
+    #footer.layout04 .inner .bt_top .bt_top_left {
+        order:2;
+        text-align:right;
+    }
+    #footer.layout04 .inner .bt_top .bt_top_left .bt_logo {
+        margin-left:auto;
+    }
+    #footer.layout04 .inner .bt_top .bt_top_left .bt_info .bt_info_list {
+        justify-content:flex-end;
+        margin:0 0 0 auto;
+    }
+    #footer.layout04 .inner .bt_top .bt_top_left .bt_info .bt_info_list > div {
+        margin:0 0 0 10px;
+    }
+    #footer.layout04 .inner .bt_top .bt_top_right {
+        order:1;
+        text-align:left;
+        margin:0;
+    }
+    #footer.layout04 .inner .bt_bottom .bt_bottom_left {
+        order:2;
+        text-align:right;
+        margin:0 0 0 50px;
+    }
+    #footer.layout04 .inner .bt_bottom .bt_bottom_left .bt_copyright {
+        text-align:right;
+    }
+    #footer.layout04 .inner .bt_bottom .bt_escrow {
+        order:1;
+        text-align:left;
+    }
+
+    /* 풀사이즈 */
+    #contents > .section {
+        max-width:1420px;
+        width:92%;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .section_full {
+        width:100% !important;
+        max-width:100% !important;
+    }
+}

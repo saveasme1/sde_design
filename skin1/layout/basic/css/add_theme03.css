@@ -1,0 +1,118 @@
+/** subpage_theme04 (button_color - Cobalt),(Webfont - 스위트) **/
+
+
+.theme04,
+.theme04 input,
+.theme04 select,
+.theme04 textarea,
+.theme04 code,
+.theme04 button {font-family:"SUITE", sans-serif !important;}
+
+/* 버튼 */
+.theme04 .xans-product-action .action_button .sub_sold,
+.theme04 [class^='btnSubmit']:not(.disabled) {background:#253294;color:#fff;}
+.theme04 .xans-product-action .action_button .sub_sold:hover,
+.theme04 [class^='btnSubmit']:not(.disabled):hover {background-color:#253294B3;box-shadow:none;}
+.theme04 [class^='btnNormal']:not(.disabled),
+.theme04 .main_image_text_gallery_more .main_image_text_gallery_more_btn,
+.theme04 .more .btnMore {border:1px solid #ccc; color:#1c1c1c;}
+.theme04 [class^='btnNormal']:not(.disabled):hover,
+.theme04 [class^='btnNormal']:not(.disabled).selected,
+.theme04 .main_image_text_gallery_more .main_image_text_gallery_more_btn:hover,
+.theme04 .more .btnMore:hover{border-color:#253294;text-decoration:none;}
+
+/* 최상단 배너 */
+.theme04 .main_top_banner {background-color:#253294;}
+.theme04 .main_top_banner .top_banner_box_inner .top_banner_text a,
+.theme04 .main_top_banner .top_banner_box_inner .top_banner_close {color:#fff;}
+.theme04 .main_top_banner .top_banner_box_inner .top_banner_close .icon:before,
+.theme04 .main_top_banner .top_banner_box_inner .top_banner_close .icon:after {background:#fff;}
+
+/* 상단 메뉴 */
+.theme04 #header .inner .top_nav_box .top_logo a {line-height:initial;}
+.theme04 #header .inner .top_nav_box .top_category > ul > li > a:after {background-color:#253294;}
+.theme04 #header .inner .top_nav_box .top_mypage a.xans-layout-orderbasketcount span {background-color:#253294;}
+.theme04 #header .inner .top_nav_box .top_mypage .wrap_log_menu li a:hover,
+.theme04 #header .inner .top_nav_box .top_category .sub-category li:hover > a,
+.theme04 #header .inner .toparea .toparea_shoppinginfo .xans-layout-multishoplist > ul li a:hover {color:#253294 !important;}
+.theme04 #header .inner .toparea .toparea_state .toparea_state_board > ul li a:hover {color:#253294;}
+.theme04 #header .inner .top_nav_box .top_category .sub_cate01 li:hover > a,
+.theme04 #header .inner .top_nav_box .top_category .sub-category li:hover > a {color:#253294;}
+
+/* 메인타이틀 */
+.theme04 .listpage_title div:after,
+.theme04 .main_title .main_title_txt01:after {background:#253294;}
+
+/* 상품 진열 할인율 */
+.theme04 .sale_box {background-color:#253294 !important;}
+
+/* 비디오배너 */
+.theme04 .main_video .background_video {background:#253294;}
+
+/* 슬라이드바 */
+.theme04 .swiper-container .swiper-scrollbar {background:#F3F3FF;}
+.theme04 .swiper-container .swiper-scrollbar .swiper-scrollbar-drag {background:#253294;}
+.theme04 .swiper-pagination-bullet {background:#F3F3FF;opacity:1;}
+.theme04 .swiper-pagination-bullet-active {background:#253294;}
+
+/* 메인 탭상품 상품진열 */
+.theme04 .main_product_category .main_product_inner .main_product_tab li .button.active {color:#253294;}
+.theme04 .main_product_category .main_product_inner .main_product_tab li .button:after {background-color:#253294;}
+
+/* 메인 지도 */
+.theme04 .main_map .main_map_banner picture { max-width:650px; }
+.theme04 .main_map .main_map_banner .main_map_banner_txt_box .main_long_banner_link a {color:#fff;background-color:#253294;border:transparent;}
+.theme04 .main_map .main_map_banner .main_map_banner_txt_box .main_long_banner_link a:hover {background-color:#253294B3;}
+
+/* 하단 */
+.theme04 #right_quick > div:first-child a {background:#ffffff00;}
+
+/* 목록페이지 중분류 */
+.theme04 .listpage_title:after {background:#253294;}
+.theme04 .ec-base-tab.typeMenu li.selected a.button {color:#253294;}
+.theme04 .ec-base-product .prdList .thumbnail .badge {color:#1c1c1c;}
+.theme04 .ec-base-tab.typeMenu ul > li > ul > li a:hover {color:#253294 !important;}
+
+/* 상세페이지 */
+.theme04 .ec-base-paginate.typeSwipe button.circle {background:#F3F3FF !important; opacity:1 !important;}
+.theme04 .ec-base-paginate.typeSwipe button.circle.selected {background:#253294 !important;}
+.theme04 .tabProduct li.selected a {color: #253294;border-bottom: 2px solid #253294;}
+.theme04 .tabProduct li.selected a span {background-color:#253294;}
+.theme04 .xans-coupon-productdetailajax.section > .title h2 {color:#253294;border-bottom:2px solid #253294;}
+.theme04 .xans-product-detail .infoArea #totalProducts > table > tbody,
+.theme04 .xans-product-detail .infoArea #totalProducts .option_product {background:#F3F3FF;}
+.theme04 .xans-product-additional .view .ec-base-button a {color:#253294;}
+.theme04 .xans-product-additional .view .ec-base-button a .icon[class*="icoArrow"] {border-left: 1px solid #253294;border-bottom: 1px solid #253294;}
+.theme04 .xans-product-detail .infoArea #totalProducts .option_product
+
+/* 사이드바 */
+.theme04 .navigation-menu__category .cate_h {color: #253294;}
+.theme04 .navigation-menu__board .title,
+.theme04 .navigation-menu__project .title {color: #253294;}
+.theme04 #aside .xans-layout-multishoplist .toggle {border: 1px solid #253294;color: #253294;}
+.theme04 #aside .xans-layout-multishoplist .toggle .icon.icoArrowBottom {border-color:#253294;}
+.theme04 #aside .xans-layout-multishoplist ul li {border: 1px solid #253294;border-top:none;}
+
+/* 캐러셀 */
+.theme04 .smart-banner-bx-wrapper .bx-pager.bx-default-pager a {background:#F3F3FF !important;}
+.theme04 .smart-banner-bx-wrapper .bx-pager.bx-default-pager a:hover, .theme04 .smart-banner-bx-wrapper .bx-pager.bx-default-pager a.active {background:#253294 !important;} 
+.theme04 .ec-base-paginate.typeSwipe [id*='swipe-button'] button {background:#F3F3FF; opacity:1;}
+.theme04 .ec-base-paginate.typeSwipe [id*='swipe-button'] button.selected {background:#253294;}
+
+/* 메인 텍스트 박스 */
+.theme04 .main_text {background:#fafafa;}
+.theme04 .main_text .main_long_banner .main_long_banner_txt .main_long_banner_txt01,
+.theme04 .main_text .main_long_banner .main_long_banner_txt .main_long_banner_txt02 {color:#1c1c1c;}
+
+/* 로고 - 디자인 폰트 (사이드바는 디자인에따라서 class 다르기때문에)*/
+.theme04  #header .inner .top_nav_box .top_logo a,
+.theme04  #footer .inner .bt_logo a,
+.theme04  #aside .navigation_member .side_logo a {
+    font-family: "TTLaundryGothic";
+}
+.theme04  #aside .navigation-menu .slide_logo a {
+    font-family: "TTLaundryGothic";
+}
+.theme04  #aside .navigation-menu .top_logo a {
+    font-family: "TTLaundryGothic";
+}

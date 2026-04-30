@@ -1,0 +1,51 @@
+<aside id="aside" module="layout_slidePackage" data-ez="contents-0gsppad-1">
+    <!--@css(/layout/basic/css/slideMenu.css)-->
+	<!--@js(/layout/basic/js/slide_menu.js)-->
+    <nav class="navigation-menu" role="navigation">
+		<div class="slide_top_inner">
+			<div class="slide_logo" module="Layout_LogoTop"><a href="/"><img src="{$logo}" alt="{$mall_name}"></a></div><!-- //slide_logo -->
+			<button type="button" class="btnClose"><i aria-hidden="true" class="icon icoClose"></i>닫기</button>
+
+			<div class="navigation_state" data-ez-group="top-util-menu" data-ez-role="list">
+				<a data-ez-item="join" module="Layout_statelogoff" href="/member/agreement.html">회원가입</a>
+				<a data-ez-item="login" module="Layout_statelogoff" href="/member/login.html">로그인</a>
+				<a data-ez-item="modify" module="Layout_stateLogon" href="/member/modify.html">내정보수정</a>
+				<a data-ez-item="logout" module="Layout_stateLogon" href="{$action_logout}">로그아웃</a>
+				<a data-ez-item="order" href="/myshop/order/list.html">주문조회</a>
+				<a data-ez-item="mypage" module="Layout_stateLogon" href="/myshop/index.html">마이페이지</a>
+				<a data-ez-item="recent" href="/product/recent_view_product.html">최근본상품</a>
+			</div><!-- //navigation_state -->
+		</div><!-- //navigation-menu -->
+
+		<div class="nav_inner">
+			<div class="tab_inner">
+				<div data-ez-module="menu-side/1"><div id="slideCateList" class="navigation-menu__category">
+  <ul id="slide_add_category"><li><a href="/product/ZERON-%EC%9E%89%ED%81%AC%EC%A0%AF%EC%A0%84%EC%9A%A9-PVC-%EB%B0%B1%EC%B9%B4%EB%93%9C-%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C-%EC%B6%9C%EB%A0%A5%EC%9A%A9-%EC%97%A1%EC%86%90%ED%98%B8%ED%99%98-Z102/30/category/48/display/1/" class="view">잉크젯프린터용</a><ul class="sub_cate01"><li><a href="/category/Shirt/46/" class="view">Shirt</a></li><li><a href="/category/Jacket/47/" class="view">Jacket</a></li></ul></li><li><a href="/category/Pants/43/" class="view">ID카드프린터용</a></li><li><a href="/category/Sneakers/44/" class="view">UV프린터용</a></li><li><a href="/category/-Accessory/45/" class="view">포장용품 및 악세사리</a></li><li><a href="#" class="view">Z-MADE</a></li></ul>
+  </div></div><!-- //menu-side/1 -->
+
+				<div class="community_tab">
+					<div class="side_title">고객센터<span></span></div>
+					<div class="board cboth">
+						<ul module="Layout_BoardInfo"><!-- 슬라이드 게시판 자동출력 -->
+							<li><a href="{$board_list_url}">{$board_name}</a></li>
+							<li><a href="{$board_list_url}">{$board_name}</a></li>
+						</ul>
+					</div>
+				</div><!-- //community_tab -->
+			</div><!-- //tab_inner -->
+
+			<div module="Layout_multishopList">
+				<button type="button" class="toggle lang_title">LANGUGE : {$current_language}<span></span></button>
+				<ul module="Layout_multishopListitem">
+					<li class="{$selected_class}">
+						<a href="//{$shop_domain}/">{$locale_language}</a>
+					</li>
+					<li class="{$selected_class}">
+						<a href="//{$shop_domain}/">{$locale_language}</a>
+					</li>
+				</ul>
+			</div>
+		</div><!-- //nav_inner -->
+	</nav>
+</aside>
+<!--#ez="1/12"-->

@@ -1,0 +1,302 @@
+<!--@layout(/layout/basic/layout.html)-->
+<!--@js(/layout/basic/js/main.js)-->
+<!--@css(/layout/basic/css/main.css)-->
+<!--@import(/smart-banner/shop1/smart-banner-admin-INIT00001.html)-->
+<section class="section main_product_list" data-ez-module="product-list/1" data-ez-layout="grid4">
+	<ez-prop data-version="1.0.0">
+		<ez-var data-prop="layout" data-namespace="ez.module.product-list.layout" data-type="array">
+			<ez-item data-id="grid3" data-name="일반3단형(PC 3열/MOBILE 1열)"></ez-item>
+			<ez-item data-id="grid4" data-name="일반4단형(PC 4열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid5" data-name="일반5단형(PC 5열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid3 list_gallery" data-name="이미지강조3단형(PC 3열/MOBILE 1열)"></ez-item>
+			<ez-item data-id="grid4 list_gallery" data-name="이미지강조4단형(PC 4열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid5 list_gallery" data-name="이미지강조5단형(PC 5열/MOBILE 2열)"></ez-item>
+		</ez-var>
+	</ez-prop>
+
+	<div class="main_title ez-align-left" data-ez-role="ez-align" data-ez-align="left"><!-- 베스트셀러 타이틀 수정하는곳 -->
+		<div class="main_title_txt01" data-ez-role="title">베스트 셀러</div>
+		<div class="main_title_txt02" data-ez-role="subtitle">금주의 베스트 아이템</div>
+	</div><!-- //main_title -->
+
+	<div data-ez-holder="product_listmain">
+		<div module="product_listmain_1" class="ec-base-product">
+			<!--
+				$count = 8
+				$basket_result = /product/add_basket.html
+				$basket_option = /product/basket_option.html
+				$moreview = yes
+				$cache = yes
+			-->
+			<ul class="prdList grid4" data-ez-role="layout ez-discount-tag">
+			<!--@import(/product/list_product.html)-->
+			</ul>
+		</div>
+		<div module="product_listmore_1" class="more">
+			<a href="#none" onclick="{$more_action}" class="btnMore">
+				MORE
+			</a>
+		</div>
+	</div>
+</section>
+<section class="section main_image_text_gallery" data-ez-module="image-gallery/2" data-ez-role="style.background" data-ez-item-length="3">
+	<ez-prop data-version="1.0.0">
+		<ez-var data-prop="image" data-namespace="ez.module.image-gallery.image">
+			<ez-item data-id="size" data-pc="546 350" data-mobile="546 350"></ez-item>
+		</ez-var>
+		<ez-var data-prop="display" data-namespace="ez.module.image-gallery.display">
+			<ez-item data-id="item" data-max="10"></ez-item>
+			<ez-item data-id="column" data-default="3" data-min="1" data-max="5"></ez-item>
+		</ez-var>
+		<ez-var data-prop="layout" data-namespace="ez.module.image-gallery.layout">
+			<ez-item data-id="mobile" data-default="slide">
+				<ez-item data-id="options" data-type="array">
+					<ez-item data-id="slide" data-name="슬라이드"></ez-item>
+					<ez-item data-id="more" data-name="더보기"></ez-item>
+					<ez-item data-id="none" data-name="사용안함"></ez-item>
+				</ez-item>
+			</ez-item>
+		</ez-var>
+	</ez-prop>
+	<div class="main_title ez-align-left" data-ez-role="ez-align" data-ez-align="left"><!-- 커먼라이브 타이틀 수정하는곳 -->
+		<div class="main_title_txt01" data-ez-role="title">커먼라이브</div>
+		<div class="main_title_txt02" data-ez-role="desc">진행중 이벤트&amp;프로모션</div>
+	</div><!-- //main_title -->
+
+    <div class="main_3dan_banner ez-mobile-layout-slide" data-ez-role="ez-mobile-layout" data-ez-mobile-layout="slide"><!-- 메인 3단배너 수정하는곳 -->
+         <ul data-ez-role="image-list ez-column" class="ez-column-3" data-ez-column="3">
+            <li data-ez-role="image-item ez-align">
+				<a data-ez-role="a" href="#" target="_self">
+					<picture>
+						<source srcset="/SkinImg/img/main_banner01_pc.jpg" media="(max-width: 1024px)" data-ez-role="img-pc">
+						<img src="/SkinImg/img/main_banner01_pc.jpg" data-ez-role="img-mobile" loading="lazy">
+					</picture>
+					<div class="main_3dan_banner_txt">
+						<div class="main_3dan_banner_txt01" data-ez-role="title">COMMOM EVENT</div>
+						<div class="main_banner_more" data-ez-role="desc">자세히 살펴보기</div>
+					</div><!-- //main_3dan_banner_txt -->
+				</a>
+            </li>
+            <li data-ez-role="image-item ez-align">
+				<a data-ez-role="a" href="#" target="_self">
+					<picture>
+						<source srcset="/SkinImg/img/main_banner02_pc.jpg" media="(max-width: 1024px)" data-ez-role="img-pc">
+						<img src="/SkinImg/img/main_banner02_pc.jpg" data-ez-role="img-mobile" loading="lazy">
+					</picture>
+					<div class="main_3dan_banner_txt">
+						<div class="main_3dan_banner_txt01" data-ez-role="title">SELECT LIVE</div>
+						<div class="main_banner_more" data-ez-role="desc">자세히 살펴보기</div>
+					</div><!-- //main_3dan_banner_txt -->
+				</a>
+            </li>
+            <li data-ez-role="image-item ez-align">
+				<a data-ez-role="a" href="#" target="_self">
+					<picture>
+						<source srcset="/SkinImg/img/main_banner03_pc.jpg" media="(max-width: 1024px)" data-ez-role="img-pc">
+						<img src="/SkinImg/img/main_banner03_pc.jpg" data-ez-role="img-mobile" loading="lazy">
+					</picture>
+					<div class="main_3dan_banner_txt">
+						<div class="main_3dan_banner_txt01" data-ez-role="title">NEW PRODUCTS</div>
+						<div class="main_banner_more" data-ez-role="desc">자세히 살펴보기</div>
+					</div><!-- //main_3dan_banner_txt -->
+				</a>
+            </li>
+		</ul>
+		<div class="main_image_text_gallery_more"><a href="#none" class="main_image_text_gallery_more_btn">더보기</a></div>
+	</div><!-- //main_3dan_banner -->
+</section>
+<section class="section main_text ez-textsize-medium ez-align-center" data-ez-module="text/1" data-ez-role="style.background" data-ez-align="center" data-ez-textsize="medium" style="background-color: rgb(127, 127, 127);">
+	<div class="main_title_inner"><!-- 트랜드픽 타이틀 수정하는곳 -->
+		<div class="main_long_banner_txt">
+			<div class="main_title_txt01" data-ez-role="title" style="color: rgb(255, 255, 255);">TREND PICK</div>
+			<div class="main_title_txt02" data-ez-role="desc" style="color: rgb(255, 255, 255);"><p>지금바로 커먼셀렉트의 인기있는 상품들을 만나보세요.</p></div>
+			<div class="main_text_link"><a data-ez-role="a" href="#" target="_self">자세히 보기</a></div>
+		</div>
+	</div><!-- //main_title_inner -->
+</section>
+<section class="section main_product_slide" data-ez-module="product-list-slide/2" data-ez-layout="grid5_slide">
+	<ez-prop data-version="1.0.0">
+		<ez-var data-prop="layout" data-namespace="ez.module.product-list-slide.layout" data-type="array">
+			<ez-item data-id="grid3_slide" data-name="일반3단형(PC 3열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid4_slide" data-name="일반4단형(PC 4열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid5_slide" data-name="일반5단형(PC 5열/MOBILE 3열)"></ez-item>
+			<ez-item data-id="grid3_slide list_gallery" data-name="이미지강조3단형(PC 3열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid4_slide list_gallery" data-name="이미지강조4단형(PC 4열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid5_slide list_gallery" data-name="이미지강조5단형(PC 5열/MOBILE 3열)"></ez-item>
+		</ez-var>
+	</ez-prop>
+
+	<div class="main_title ez-align-left" data-ez-role="ez-align" data-ez-align="left"><!-- 신상품 타이틀 수정하는곳 -->
+		<div class="main_title_txt01" data-ez-role="title">신상품</div>
+		<div class="main_title_txt02" data-ez-role="subtitle">새롭게 출시된 상품들</div>
+	</div><!-- //main_title -->
+
+	<div data-ez-holder="product_listmain">
+	<div module="product_listmain_1" class="ec-base-product swiper-container special_slide">
+		<ul class="swiper-wrapper prdList grid5_slide" data-ez-role="layout ez-discount-tag">
+			<!--@import(/product/list_product_slide.html)-->
+		</ul>
+		<div class="swiper-scrollbar"></div>
+	</div>
+	</div>
+	<div class="swiper-button-prev swiper-prev-special"></div>
+	<div class="swiper-button-next swiper-next-special"></div>
+</section>
+<section class="section main_video ez-align-center" data-ez-module="video/1" data-ez-role="style.background" data-ez-align="center">
+	<div class="main_video_box">
+		<iframe data-ez-role="video" id="ytplayer" type="text/html" src="https://m-img.cafe24.com/images/ec/sde/video/commonselect_1366x720.mp4" frameborder="0" allowfullscreen data-ez-rawsrc="https://m-img.cafe24.com/images/ec/sde/video/commonselect_1366x720.mp4" loading="lazy"></iframe>
+	</div>
+	<div class="main_video_title"><!-- 비디오 타이틀 수정하는곳 -->
+		<div class="main_title_txt01" data-ez-role="title">BRAND STORY</div>
+		<div class="main_title_txt02" data-ez-role="desc">커먼셀렉트는 가치있는 삶을 위해 본질에 집중하고<br>지속가능한 스타일을 만들어 나가고 있습니다.</div>
+	</div><!-- //main_video_title -->
+	<div class="background_video"></div>
+</section>
+<section class="section main_product_category" data-ez-module="product-list-category/2" data-ez-layout="grid4">
+    <ez-prop data-version="1.0.0">
+        <ez-var data-prop="layout" data-namespace="ez.module.product-list-category.layout" data-type="array">
+			<ez-item data-id="grid3" data-name="일반3단형(PC 3열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid4" data-name="일반4단형(PC 4열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid5" data-name="일반5단형(PC 5열/MOBILE 3열)"></ez-item>
+			<ez-item data-id="grid3 list_gallery" data-name="이미지강조3단형(PC 3열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid4 list_gallery" data-name="이미지강조4단형(PC 4열/MOBILE 2열)"></ez-item>
+			<ez-item data-id="grid5 list_gallery" data-name="이미지강조5단형(PC 5열/MOBILE 3열)"></ez-item>
+		</ez-var>
+	</ez-prop>
+	<div class="main_product_inner ez-align-left" data-ez-role="ez-align" data-ez-align="left">
+		<div class="main_title"><!-- 세일상품 타이틀 수정하는곳 -->
+			<div class="main_title_txt01" data-ez-role="title">SALE ITEM</div>
+			<div class="main_title_txt02" data-ez-role="subtitle">기간한정 세일 상품들</div>
+		</div><!-- //main_title -->
+
+		<ul class="main_product_tab" data-ez-role="tab-list">
+			<li data-ez-role="tab-item"><button type="button" class="button" data-id="tabContent1" data-ez-role="name">새로운 카테고리</button></li>
+			<li data-ez-role="tab-item"><button type="button" class="button" data-id="tabContent2" data-ez-role="name">새로운 카테고리</button></li>
+			<li data-ez-role="tab-item"><button type="button" class="button" data-id="tabContent3" data-ez-role="name">새로운 카테고리</button></li>
+			<li data-ez-role="tab-item"><button type="button" class="button" data-id="tabContent4" data-ez-role="name">새로운 카테고리</button></li>
+		</ul>
+	</div><!-- //main_product_inner -->
+
+	<div class="content_list" data-ez-role="content-list">
+		<div class="tabcontent" id="tabContent1" data-ez-role="content-item">
+			<div data-ez-holder="product_listmain">
+				<div module="product_listmain_1" class="ec-base-product">
+					<!--
+						$count = 100
+						$basket_result = /product/add_basket.html
+						$basket_option = /product/basket_option.html
+						$moreview = yes
+						$cache = yes
+					-->
+					<ul class="prdList grid4" data-ez-role="layout ez-discount-tag">
+						<!--@import(/product/list_product.html)-->
+					</ul>
+				</div>
+				<div module="product_listmore_1" class="more">
+					<a href="#none" onclick="{$more_action}" class="btnMore">
+						MORE
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="tabcontent" id="tabContent2" data-ez-role="content-item">
+			<div data-ez-holder="product_listmain">
+				<div module="product_listmain_2" class="ec-base-product">
+					<!--
+						$count = 100
+						$basket_result = /product/add_basket.html
+						$basket_option = /product/basket_option.html
+						$moreview = yes
+						$cache = yes
+					-->
+					<ul class="prdList grid4" data-ez-role="layout ez-discount-tag">
+						<!--@import(/product/list_product.html)-->
+					</ul>
+				</div>
+				<div module="product_listmore_2" class="more">
+					<a href="#none" onclick="{$more_action}" class="btnMore">
+						MORE
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="tabcontent" id="tabContent3" data-ez-role="content-item">
+			<div data-ez-holder="product_listmain">
+				<div module="product_listmain_3" class="ec-base-product">
+					<!--
+						$count = 100
+						$basket_result = /product/add_basket.html
+						$basket_option = /product/basket_option.html
+						$moreview = yes
+						$cache = yes
+					-->
+					<ul class="prdList grid4" data-ez-role="layout ez-discount-tag">
+						<!--@import(/product/list_product.html)-->
+					</ul>
+				</div>
+				<div module="product_listmore_3" class="more">
+					<a href="#none" onclick="{$more_action}" class="btnMore">
+						MORE
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="tabcontent" id="tabContent4" data-ez-role="content-item">
+			<div data-ez-holder="product_listmain">
+				<div module="product_listmain_4" class="ec-base-product">
+					<!--
+						$count = 100
+						$basket_result = /product/add_basket.html
+						$basket_option = /product/basket_option.html
+						$moreview = yes
+						$cache = yes
+					-->
+					<ul class="prdList grid4" data-ez-role="layout ez-discount-tag">
+						<!--@import(/product/list_product.html)-->
+					</ul>
+				</div>
+				<div module="product_listmore_4" class="more">
+					<a href="#none" onclick="{$more_action}" class="btnMore">
+						MORE
+					</a>
+				</div>
+			</div>
+		</div>
+	</div><!-- //content-list -->
+</section>
+<section class="section main_map ez-align-left" data-ez-module="map/1" data-ez-align="left">
+	<ez-prop data-version="1.0.0">
+		<ez-var data-prop="image" data-namespace="ez.module.map.image">
+			<ez-item data-id="size" data-pc="700 430" data-mobile="700 430"></ez-item>
+		</ez-var>
+	</ez-prop>
+	<div class="main_map_banner"><!-- 메인 지도 -->
+		<div class="main_map_box">
+			<div class="main_map_banner_txt01" data-ez-role="title">OFFLINE SHOP</div>
+			<picture>
+				<source srcset="/SkinImg/img/main_map_pc.jpg" media="(max-width: 1024px)" data-ez-role="img-pc">
+				<img src="/SkinImg/img/main_map_pc.jpg" data-ez-role="img-mobile" loading="lazy">
+			</picture>
+			<div class="main_long_banner_link"><span class="displaynone" data-ez-role="address">서울특별시 동작구 보라매로0길 00</span><a data-ez-role="a" href="https://www.google.com/maps/dir/서울특별시%20동작구%20보라매로0길%2000" target="_blank">VIEW MORE<i aria-hidden="true" class="icon icoPlus">+</i></a></div>
+		</div>
+		<div class="main_map_banner_txt_box">
+			<div class="main_map_banner_txt" data-ez-role="desc">
+				<p><strong>주소</strong></p>
+				<p>서울특별시 동작구 보라매로0길 00</p>
+				<p>00, Boramae-ro 0-gil, Dongjak-gu, Seoul, Republic of Korea</p>
+				<p><br></p>
+				<p><br></p>
+				<p><strong>운영시간</strong></p>
+				<p>AM 09:00 - PM 06:00 (토,일,공휴일 휴무)</p>
+				<p><br></p>
+				<p><br></p>
+				<p><strong>점심시간</strong></p>
+				<p>PM 12:00 ~ PM 01:00</p>
+			</div><!-- //main_map_banner_txt -->
+		</div><!-- //main_map_banner_txt_box -->
+	</div><!-- //main_map_banner -->
+</section>
+<!--@define(cmc_log)-->
