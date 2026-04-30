@@ -591,7 +591,8 @@ jQuery(document).ready(function() {
 });
 /* 상단 카테고리 변경 감지 */
 function observeTopCategory(){
-	var targetNode = jQuery('#header .xans-layout-category > ul')[0];
+	// target only the real top category list (avoid PC split-nav ULs)
+	var targetNode = jQuery('#header .top_category > ul')[0];
 
 	// MutationObserver 인스턴스 생성
 	var observer = new MutationObserver(function(mutationsList, observer) {
@@ -607,14 +608,14 @@ function observeTopCategory(){
 
 function top_category(){
 	/* 상단카테고리 */
-	jQuery('#header .top_category li').mouseenter(function(e) {
+	jQuery('#header .top_category li, #header .pc_nav_left__list > li').mouseenter(function(e) {
 		var $this = jQuery(this).addClass('on')
 	}).mouseleave(function(e) {
 		jQuery(this).removeClass('on');
 	});
 
 	/* 상단카테고리 중분류체크 */
-	jQuery('#header .top_category ul.sub_cate01 li').each(function() {
+	jQuery('#header .top_category ul.sub_cate01 li, #header .pc_nav_left__list ul.sub_cate01 li').each(function() {
 		if (jQuery(this).children('ul').length == 0) {
 			jQuery(this).addClass('noChild');
 		}

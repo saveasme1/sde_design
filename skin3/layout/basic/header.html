@@ -66,19 +66,45 @@
 		</div><!-- //toparea -->
 
 		<div class="top_nav_box" id="top_nav_box">
+			<div class="pc_nav_left display_pc_only" module="Layout_category">
+				<ul class="pc_nav_left__list">
+					<li><a href="{$link_product_list}">{$name_or_img_tag}</a></li>
+					<li><a href="{$link_product_list}">{$name_or_img_tag}</a></li>
+					<li><a href="{$link_product_list}">{$name_or_img_tag}</a></li>
+					<li><a href="{$link_product_list}">{$name_or_img_tag}</a></li>
+					<li><a href="{$link_product_list}">{$name_or_img_tag}</a></li>
+					<li><a href="{$link_product_list}">{$name_or_img_tag}</a></li>
+					<li><a href="{$link_product_list}">{$name_or_img_tag}</a></li>
+					<li><a href="{$link_product_list}">{$name_or_img_tag}</a></li>
+				</ul>
+			</div><!-- //pc_nav_left (Layout_category) -->
+
 			<div class="top_logo" module="Layout_LogoTop"><a href="/"><img src="{$logo}" alt="{$mall_name}"></a></div><!-- //top_logo -->
 
-			<div data-ez-module="menu-main/1" data-ez-mode="manual">
-        <div class="xans-element- xans-layout xans-layout-category top_category">
-<ul><li><a href="/product/ZERON-%EC%9E%89%ED%81%AC%EC%A0%AF%EC%A0%84%EC%9A%A9-PVC-%EB%B0%B1%EC%B9%B4%EB%93%9C-%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C-%EC%B6%9C%EB%A0%A5%EC%9A%A9-%EC%97%A1%EC%86%90%ED%98%B8%ED%99%98-Z102/30/category/48/display/1/">잉크젯프린터용</a><ul class="sub_cate01"><li><a href="/category/Shirt/46/">Shirt</a></li><li><a href="/category/Jacket/47/">Jacket</a></li></ul></li><li><a href="/category/Pants/43/">ID카드프린터용</a></li><li><a href="/category/Sneakers/44/">UV프린터용</a></li><li><a href="/category/-Accessory/45/">포장용품 및 악세사리</a></li><li><a href="#">Z-MADE</a></li></ul>
-</div>
-      </div><!-- //menu-main/1 -->
+			<!-- 원본 top_category는 PC/모바일 공통 fallback -->
+			<div module="Layout_category" class="xans-element- xans-layout xans-layout-category top_category top_category--fallback">
+				<ul>
+					<li><a href="{$link_product_list}">{$name_or_img_tag}</a></li>
+				</ul>
+			</div><!-- //top_category -->
 
-			<div class="top_mypage">
-				<a href="javascript:;" class="eSearch"><!--@import(/svg/icon-search.html)--></a>
-				<a href="/myshop/index.html"><!--@import(/svg/icon-user.html)--></a>
-				<a href="/order/basket.html" module="Layout_orderBasketcount"><!--@import(/svg/icon-cart.html)--><span class="count {$basket_count_display|display} {$basket_count_display_class}"><span class="{$basket_count_class}">{$basket_count}</span></span></a>
-			</div><!-- //top_mypage -->
+			<div class="pc_right_area">
+				<div class="pc_nav_right_board display_pc_only" module="Layout_BoardInfo">
+					<ul class="pc_nav_right_board__list">
+						<li><a href="{$link_board_list}">{$board_name}</a></li>
+						<li><a href="{$link_board_list}">{$board_name}</a></li>
+						<li><a href="{$link_board_list}">{$board_name}</a></li>
+						<li><a href="{$link_board_list}">{$board_name}</a></li>
+						<li><a href="{$link_board_list}">{$board_name}</a></li>
+					</ul>
+				</div><!-- //pc_nav_right_board -->
+
+				<div class="top_mypage">
+					<a href="javascript:;" class="eSearch"><!--@import(/svg/icon-search.html)--></a>
+					<a href="/myshop/index.html"><!--@import(/svg/icon-user.html)--></a>
+					<a href="/order/basket.html" module="Layout_orderBasketcount"><!--@import(/svg/icon-cart.html)--><span class="count {$basket_count_display|display} {$basket_count_display_class}"><span class="{$basket_count_class}">{$basket_count}</span></span></a>
+				</div><!-- //top_mypage -->
+			</div>
 
 			<div class="top_sidebar">
 				<a href="javascript:;" class="eNavFold"><i aria-hidden="true" class="icon icoNav"></i></a>
