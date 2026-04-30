@@ -123,12 +123,65 @@
 		display:block;
 		padding:0 2px;
 		opacity:.9;
-		border-bottom:2px solid transparent;
+		border-bottom:0;
 	}
 	#header.layout03 .inner .top_nav_box .pc_nav_left__list > li > a:hover,
 	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list > li > a:hover{
 		opacity:1;
-		border-bottom-color:#111;
+		color:inherit;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list > li:hover > a,
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list > li:focus-within > a,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list > li:hover > a,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list > li:focus-within > a{
+		opacity:1;
+		color:inherit;
+	}
+
+	/* Layout_category 모듈이 UL/LI 클래스 치환해도 동작하도록 컨테이너 기반으로 한 번 더 보강 */
+	#header.layout03 .inner .top_nav_box .pc_nav_left > ul,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board > ul{
+		display:flex;
+		align-items:center;
+		gap:18px;
+		margin:0;
+		padding:0;
+		list-style:none;
+		flex-wrap:nowrap;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left > ul{
+		justify-content:flex-end;
+		padding-right:70px;
+	}
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board > ul{
+		justify-content:flex-start;
+		padding-left:70px;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left > ul > li,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board > ul > li{
+		height:64px;
+		display:flex;
+		align-items:center;
+		position:relative;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left > ul > li > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board > ul > li > a{
+		font-size:15px;
+		font-weight:500;
+		line-height:1;
+		color:#1a1a1a;
+		white-space:nowrap;
+		display:block;
+		padding:0 2px;
+		opacity:.9;
+		border-bottom:0;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left > ul > li:hover > a,
+	#header.layout03 .inner .top_nav_box .pc_nav_left > ul > li:focus-within > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board > ul > li:hover > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board > ul > li:focus-within > a{
+		opacity:1;
+		color:inherit;
 	}
 
 	/* PC 좌/우 메뉴에서 필요한 항목만 보여주기 */
@@ -137,11 +190,27 @@
 
 	/* PC 좌/우 메뉴의 서브카테고리 드롭다운 */
 	/* skin2 느낌: fade + slide (brand: black) */
+	/* NOTE: Layout_category 모듈이 UL 클래스를 치환하는 경우가 있어 컨테이너 기반 셀렉터도 함께 지원 */
 	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub_cate01,
 	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub-category,
 	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub_cate01,
 	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub-category{
-		display:block;
+		display:block !important;
+		opacity:0;
+		visibility:hidden;
+		pointer-events:none;
+		transform:translateY(8px);
+		transition:
+			opacity .18s cubic-bezier(.45,.46,.05,.96),
+			transform .18s cubic-bezier(.45,.46,.05,.96),
+			visibility 0s linear .18s;
+		will-change:opacity, transform;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_left .sub-category,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board .sub-category{
+		display:block !important;
 		opacity:0;
 		visibility:hidden;
 		pointer-events:none;
@@ -175,6 +244,211 @@
 			transform .22s cubic-bezier(.45,.46,.05,.96),
 			visibility 0s;
 	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list > li:hover .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list > li:hover > .sub-category,
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list > li:focus-within .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list > li:focus-within > .sub-category,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list > li:hover .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list > li:hover > .sub-category,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list > li:focus-within .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list > li:focus-within > .sub-category{
+		position:absolute;
+		top:64px;
+		left:0;
+		z-index:10;
+		margin:0;
+		width:auto;
+		min-width:120px;
+		padding:10px 0;
+		background-color:#fff;
+		border:1px solid #e8e8e8;
+		opacity:1;
+		visibility:visible;
+		pointer-events:auto;
+		transform:translateY(0);
+		transition:
+			opacity .22s cubic-bezier(.45,.46,.05,.96),
+			transform .22s cubic-bezier(.45,.46,.05,.96),
+			visibility 0s;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover > .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover > .sub-category,
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:focus-within > .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:focus-within > .sub-category,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover > .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover > .sub-category,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:focus-within > .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:focus-within > .sub-category{
+		position:absolute;
+		top:64px;
+		left:0;
+		z-index:10;
+		margin:0;
+		width:auto;
+		min-width:120px;
+		padding:10px 0;
+		/* PC submenu glass background (static) */
+		background: rgba(255, 255, 255, 0.62);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(38, 56, 155, 0.12);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.045);
+		border-radius:14px;
+		overflow:hidden;
+		opacity:1;
+		visibility:visible;
+		pointer-events:auto;
+		transform:translateY(0);
+		transition:
+			opacity .22s cubic-bezier(.45,.46,.05,.96),
+			transform .22s cubic-bezier(.45,.46,.05,.96),
+			visibility 0s;
+	}
+
+	/* 잉크젯 프린터 출력 느낌: 글자 없음 -> 헤드 좌우 왕복(40회+)하며 내려오면서 찍힘 */
+	:root{
+		--pcPrintHeadW: 120px; /* 헤드(가로선) 길이: 더 크게 보이게 */
+	}
+	@keyframes pcPrintText{
+		from{opacity:0; filter:blur(1px);}
+		to{opacity:1; filter:blur(0);}
+	}
+	@keyframes pcPrintHeadX{
+		from{transform:translateX(calc(-1 * var(--pcPrintHeadW)));}
+		to{transform:translateX(100%);}
+	}
+	@keyframes pcPrintHeadY{
+		from{top:18%;}
+		to{top:82%;}
+	}
+	@keyframes pcPrintHeadFade{
+		0%{opacity:1;}
+		85%{opacity:1;}
+		100%{opacity:0;}
+	}
+
+	/* 기본 상태에서는 텍스트 정상 표시(hover/close 반복 시 깜빡임 방지) */
+	#header.layout03 .inner .top_nav_box .pc_nav_left :is(.sub_cate01,.sub-category) li > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board :is(.sub_cate01,.sub-category) li > a{
+		opacity:1;
+	}
+
+	/* "프린트 영역"을 텍스트 폭으로 맞춤 */
+	#header.layout03 .inner .top_nav_box .pc_nav_left :is(.sub_cate01,.sub-category) li,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board :is(.sub_cate01,.sub-category) li{
+		padding:0 20px 0 10px;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left :is(.sub_cate01,.sub-category) li > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board :is(.sub_cate01,.sub-category) li > a{
+		display:inline-block !important;
+		padding:10px 0 !important;
+		width:max-content;
+		max-width:100%;
+		overflow:hidden; /* 헤드가 텍스트 폭 안에서만 이동 */
+	}
+
+	/* 오픈 시: 각 항목이 프린트되며 나타남 (상단->하단 약간의 딜레이) */
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li > a,
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:focus-within :is(.sub_cate01,.sub-category) li > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:focus-within :is(.sub_cate01,.sub-category) li > a{
+		opacity:0;
+		/* 더 빠르게 왔다갔다하며 내려오게 */
+		animation:pcPrintText .72s steps(96,end) forwards;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(1) > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(1) > a{animation-delay:.00s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(2) > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(2) > a{animation-delay:.06s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(3) > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(3) > a{animation-delay:.12s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(4) > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(4) > a{animation-delay:.18s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(5) > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(5) > a{animation-delay:.24s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(6) > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(6) > a{animation-delay:.30s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(7) > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(7) > a{animation-delay:.36s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(8) > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(8) > a{animation-delay:.42s;}
+
+	/* 프린터 헤드(브랜드 컬러 라인) - 좌우 왕복 48회(>40) + 아래로 이동 */
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li > a::before,
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:focus-within :is(.sub_cate01,.sub-category) li > a::before,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li > a::before,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:focus-within :is(.sub_cate01,.sub-category) li > a::before{
+		content:"";
+		position:absolute;
+		left:0;
+		width:var(--pcPrintHeadW);
+		height:1px;
+		background:#26389b;
+		opacity:1;
+		top:18%;
+		animation:
+			pcPrintHeadX .0075s linear 96 alternate,
+			pcPrintHeadY .72s linear 1 forwards,
+			pcPrintHeadFade .72s linear 1 forwards;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(1) > a::before,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(1) > a::before{animation-delay:.00s,.00s,.00s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(2) > a::before,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(2) > a::before{animation-delay:.06s,.06s,.06s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(3) > a::before,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(3) > a::before{animation-delay:.12s,.12s,.12s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(4) > a::before,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(4) > a::before{animation-delay:.18s,.18s,.18s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(5) > a::before,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(5) > a::before{animation-delay:.24s,.24s,.24s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(6) > a::before,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(6) > a::before{animation-delay:.30s,.30s,.30s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(7) > a::before,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(7) > a::before{animation-delay:.36s,.36s,.36s;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left li:hover :is(.sub_cate01,.sub-category) li:nth-child(8) > a::before,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board li:hover :is(.sub_cate01,.sub-category) li:nth-child(8) > a::before{animation-delay:.42s,.42s,.42s;}
+
+	/* 하위메뉴 hover 스타일: 배경색 제거 + 볼드 + 브랜드 수직바(#26389b) */
+	#header.layout03 .inner .top_nav_box .pc_nav_left :is(.sub_cate01,.sub-category) li > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board :is(.sub_cate01,.sub-category) li > a{
+		background-color:transparent !important;
+		position:relative;
+		padding-left:10px;
+		padding-bottom:10px;
+	}
+	/* 이후 hover 시: 해당 메뉴 아래에만 얇은 라인 유지(브랜드) */
+	#header.layout03 .inner .top_nav_box .pc_nav_left :is(.sub_cate01,.sub-category) li > a::after,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board :is(.sub_cate01,.sub-category) li > a::after{
+		content:"";
+		position:absolute;
+		left:0;
+		right:0;
+		bottom:2px;
+		height:1px;
+		background:#26389b;
+		transform:scaleX(0);
+		opacity:0;
+		transform-origin:left;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left :is(.sub_cate01,.sub-category) li:nth-child(even) > a::after,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board :is(.sub_cate01,.sub-category) li:nth-child(even) > a::after{
+		transform-origin:right;
+	}
+	#header.layout03 .inner .top_nav_box .pc_nav_left :is(.sub_cate01,.sub-category) li:hover > a,
+	#header.layout03 .inner .top_nav_box .pc_nav_left :is(.sub_cate01,.sub-category) li:focus-within > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board :is(.sub_cate01,.sub-category) li:hover > a,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board :is(.sub_cate01,.sub-category) li:focus-within > a{
+		background-color:transparent !important;
+		font-weight:700;
+	}
+	/* 이후 hover 시: 해당 메뉴 아래에만 얇은 라인 유지 */
+	#header.layout03 .inner .top_nav_box .pc_nav_left :is(.sub_cate01,.sub-category) li:hover > a::after,
+	#header.layout03 .inner .top_nav_box .pc_nav_left :is(.sub_cate01,.sub-category) li:focus-within > a::after,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board :is(.sub_cate01,.sub-category) li:hover > a::after,
+	#header.layout03 .inner .top_nav_box .pc_right_area .pc_nav_right_board :is(.sub_cate01,.sub-category) li:focus-within > a::after{
+		opacity:1;
+		transform:scaleX(1);
+	}
 	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub_cate01 ul,
 	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub-category ul,
 	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub_cate01 ul,
@@ -197,6 +471,19 @@
 	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list li.on .sub_cate01,
 	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub_cate01 li.on > ul,
 	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub-category li.on > ul{display:block;}
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list > li:hover .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub_cate01 li:hover > ul,
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub-category li:hover > ul,
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list > li:focus-within .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub_cate01 li:focus-within > ul,
+	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub-category li:focus-within > ul,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list > li:hover .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub_cate01 li:hover > ul,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub-category li:hover > ul,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list > li:focus-within .sub_cate01,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub_cate01 li:focus-within > ul,
+	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub-category li:focus-within > ul{display:block;}
+
 	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub_cate01 li,
 	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub-category li,
 	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub_cate01 li,
@@ -230,16 +517,17 @@
 		color:#333;
 		line-height:1;
 		font-weight:400;
-		display:block;
-		padding:10px 20px 10px 10px;
+		display:inline-block !important;
+		padding:10px 0 !important;
+		width:max-content;
+		max-width:100%;
 		white-space:nowrap;
 	}
 	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub_cate01 li:hover > a,
 	#header.layout03 .inner .top_nav_box .pc_nav_left__list .sub-category li:hover > a,
 	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub_cate01 li:hover > a,
 	#header.layout03 .inner .top_nav_box .pc_nav_right_board__list .sub-category li:hover > a{
-		background-color:#e8e8e8;
-		color:#000;
+		background-color:transparent !important;
 	}
 
 	/* mypage 아이콘 위치: 높이 축소에 맞춰 상단 정렬 */
@@ -333,7 +621,127 @@
 
 	/* 풀사이즈 */
 	#contents > .section {max-width:1420px;width:92%;margin-left:auto;margin-right:auto;}
+	/* product/list.html uses wrapper; keep same width */
+	#contents .productListPage > .section {max-width:1420px;width:92%;margin-left:auto;margin-right:auto;}
 	.section_full {width:100% !important;max-width:100% !important;}
+}
+
+/* Mobile/Tablet: no submenu dropdown, no animations */
+@media all and (max-width:1024px) {
+	/* hide any generated sub categories in header/mobile menus */
+	#header :is(.sub-category, .sub_cate01){display:none !important;}
+
+	/* ensure no animation runs on submenu links even if generated */
+	#header :is(.sub-category, .sub_cate01) a{
+		animation:none !important;
+		transition:none !important;
+		filter:none !important;
+	}
+}
+
+/* Product list page: PC+Mobile filter pills + hide headings/count */
+.productListPage .section.path,
+.productListPage .section.titleArea{
+	display:none !important;
+}
+.productListPage .prdCount{display:none !important;}
+.productListPage .menuCategory .count{display:none !important;}
+.productListPage .sort{display:none !important;}
+.productListPage .product_top_image{display:none !important;}
+
+/* Turn subcategory menu into pills (no dropdown) */
+.productListPage .ec-base-tab.typeMenu{
+	margin:8px 0 12px 0; /* add a bit of top spacing */
+	display:block !important; /* prevent flex layout breakage */
+}
+@media all and (min-width:1025px){
+	.productListPage .ec-base-tab.typeMenu{margin-top:18px;}
+}
+.productListPage .ec-base-tab.typeMenu .menuCategory.menu{
+	display:flex;
+	flex-wrap:wrap;
+	gap:3px; /* tighter spacing */
+	align-items:center;
+	justify-content:center; /* PC: centered */
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+/* PC: hard center the whole pill group */
+.productListPage .display_pc_only{ text-align:center; }
+.productListPage .display_pc_only .menuCategory.menu{
+	display:inline-flex !important;
+	justify-content:center;
+	width:auto;
+	max-width:100%;
+	margin:0 auto;
+}
+.productListPage .ec-base-tab.typeMenu .menuCategory.menu > li{margin:0; padding:0;}
+.productListPage .ec-base-tab.typeMenu .menuCategory.menu > li > .iconWrap{display:none !important;}
+.productListPage .ec-base-tab.typeMenu .menuCategory.menu > li > ul{display:none !important;} /* no dropdown */
+
+.productListPage .ec-base-tab.typeMenu .menuCategory.menu > li > a.button{
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
+	border-radius:9999px;
+	border:1px solid #000;
+	background:#fff;
+	color:#000;
+	text-decoration:none;
+	font-weight:600;
+	line-height:1;
+	white-space:nowrap;
+	padding:10px 14px;
+	font-size:clamp(12px, 1.2vw, 14px);
+}
+.productListPage .ec-base-tab.typeMenu .menuCategory.menu > li.selected > a.button,
+.productListPage .ec-base-tab.typeMenu .menuCategory.menu > li[class*="selected"] > a.button{
+	background:#000;
+	color:#fff;
+	border-color:#000;
+}
+
+/* Mobile: allow horizontal scroll if many */
+@media all and (max-width:1024px){
+	.productListPage .ec-base-tab.typeMenu{margin:6px 0 10px 0; display:block !important;}
+	.productListPage .ec-base-tab.typeMenu .menuCategory.menu{
+		flex-wrap:nowrap;
+		overflow-x:auto;
+		overflow-y:hidden;
+		white-space:nowrap;
+		padding:0 12px 6px;
+		gap:1px;
+		justify-content:flex-start; /* mobile: natural scroll */
+		scrollbar-width:none;
+		-webkit-overflow-scrolling:touch;
+	}
+	.productListPage .ec-base-tab.typeMenu .menuCategory.menu::-webkit-scrollbar{display:none;}
+	.productListPage .ec-base-tab.typeMenu .menuCategory.menu > li > a.button{
+		padding:9px 12px;
+		font-size:13px;
+	}
+}
+
+/* Footer: Inicis escrow notice badge (responsive) */
+#footer .footer-escrow-notice{
+	width:100%;
+	text-align:center;
+	margin:16px 0;
+}
+#footer .footer-escrow-notice a{
+	display:inline-block;
+	max-width:100%;
+	text-decoration:none;
+}
+#footer .footer-escrow-notice img{
+	display:block;
+	width:100%;
+	max-width:160px;
+	height:auto;
+	border:0;
+	cursor:pointer;
+	margin:0 auto;
 }
 
 /* ================================
@@ -503,13 +911,14 @@
     letter-spacing:-.2px;
     text-decoration:none;
     opacity:.88;
-    border-bottom:2px solid transparent;
+    border-bottom:1px solid transparent;
   }
   .kream_menu__link:hover{opacity:1;}
   .kream_menu__item.selected .kream_menu__link,
   .kream_menu__link[aria-current="page"]{
     opacity:1;
-    border-bottom-color:#111;
+    color:inherit;
+    border-bottom-color:transparent;
   }
 
   /* Bottom nav: modern tab bar */
