@@ -1,6 +1,163 @@
 <!--@layout(/layout/basic/layout.html)-->
 <!--@js(/js/module/product/menucategory.js)-->
 <!--@css(/css/module/product/menupackage.css)-->
+<!--@js(/js/custom/product-list-filter.js?v=9)-->
+<div class="productListPage">
+<script>
+(function(){
+  function norm(s){ return (s||"").toString().replace(/\s+/g," ").trim(); }
+  function endsWithWord(text, word){
+    var t = norm(text);
+    return t.length >= word.length && t.slice(-word.length) === word;
+  }
+  function keywordFromLabel(label){
+    var t = norm(label);
+    if (t.indexOf("잉크젯") !== -1) return "잉크젯";
+    if (t.indexOf("a4") !== -1 || t.indexOf("A4") !== -1) return "a4";
+    if (t.indexOf("id카드") !== -1 || t.indexOf("ID카드") !== -1) return "id카드";
+    return "";
+  }
+
+  function shouldExcludeProduct(categoryLabel, productName){
+    var label = norm(categoryLabel);
+    var name = norm(productName);
+
+    // Added rule: label contains '카드' => exclude '용지' or '라벨지'
+    if (label.indexOf("카드") !== -1) {
+      if (name.indexOf("용지") !== -1) return true;
+      if (name.indexOf("라벨지") !== -1) return true;
+    }
+    // Suffix-based exclusions
+    if (endsWithWord(label, "카드")) {
+      if (name.indexOf("용지") !== -1) return true;
+      if (name.indexOf("라벨지") !== -1) return true;
+    }
+    if (endsWithWord(label, "인쇄")) {
+      if (name.indexOf("각인") !== -1) return true;
+    }
+    if (endsWithWord(label, "각인")) {
+      if (name.indexOf("인쇄") !== -1) return true;
+    }
+    return false;
+  }
+
+  function getAllProductLis(){
+    // Filter everything visible on list page (best/new/normal)
+    var lists = document.querySelectorAll(".productListPage .prdList");
+    var out = [];
+    for (var i=0;i<lists.length;i++){
+      var ul = lists[i];
+      if (!ul || !ul.children) continue;
+      for (var j=0;j<ul.children.length;j++){
+        var li = ul.children[j];
+        if (li && li.id && li.id.indexOf("anchorBoxId_") === 0) out.push(li);
+      }
+    }
+    return out;
+  }
+
+  function getProductName(li){
+    var a = li && li.querySelector ? li.querySelector(".description .name a") : null;
+    return norm(a ? a.textContent : "");
+  }
+
+  function setActiveByLabel(label){
+    var t = norm(label);
+    var lis = document.querySelectorAll(".productListPage .menuCategory.menu > li");
+    for (var i=0;i<lis.length;i++){
+      var li = lis[i];
+      if (!li) continue;
+      li.classList.remove("selected");
+      var a = li.querySelector("a.button");
+      if (a && norm(a.textContent) === t) li.classList.add("selected");
+    }
+  }
+
+  function applyFilter(keyword, label){
+    var items = getAllProductLis();
+    var shown = 0;
+    var kw = (keyword||"").toLowerCase();
+    for (var i=0;i<items.length;i++){
+      var li = items[i];
+      var name = getProductName(li);
+      var ok = !kw || name.toLowerCase().indexOf(kw) !== -1;
+      if (ok && shouldExcludeProduct(label, name)) ok = false;
+      li.style.display = ok ? "" : "none";
+      if (ok) shown++;
+    }
+    // If keyword filter yields 0, fall back to exclusion-only filter (still stays on page)
+    if (items.length && shown === 0) {
+      shown = 0;
+      for (var k=0;k<items.length;k++){
+        var li2 = items[k];
+        var name2 = getProductName(li2);
+        var ok2 = !shouldExcludeProduct(label, name2);
+        li2.style.display = ok2 ? "" : "none";
+        if (ok2) shown++;
+      }
+    }
+    return {total: items.length, shown: shown};
+  }
+
+  function persist(label, kw){
+    try{
+      sessionStorage.setItem("productListPageFilterLabel", norm(label));
+      sessionStorage.setItem("productListPageFilterKeyword", kw || "");
+    }catch(e){}
+  }
+  function restore(){
+    var label = "", kw = "";
+    try{
+      label = sessionStorage.getItem("productListPageFilterLabel") || "";
+      kw = sessionStorage.getItem("productListPageFilterKeyword") || "";
+    }catch(e){}
+    if (!kw) return;
+    setActiveByLabel(label);
+    applyFilter(kw, label);
+  }
+
+  function neutralizeFilterChipLinks(){
+    var anchors = document.querySelectorAll(".ec-base-tab.typeMenu .menuCategory.menu > li > a.button");
+    for (var i=0;i<anchors.length;i++){
+      var a = anchors[i];
+      if (!a) continue;
+      var kw = keywordFromLabel(a.textContent || "");
+      if (!kw) continue;
+      if (!a.getAttribute("data-href")) a.setAttribute("data-href", a.getAttribute("href") || "");
+      a.setAttribute("href", "javascript:;");
+      a.setAttribute("role", "button");
+    }
+  }
+
+  // Capture click: never navigate, always filter for known chips.
+  document.addEventListener("click", function(e){
+    var target = e.target;
+    if (!target || !target.closest) return;
+    var a = target.closest(".ec-base-tab.typeMenu .menuCategory.menu > li > a.button");
+    if (!a) return;
+    var kw = keywordFromLabel(a.textContent || "");
+    if (!kw) return;
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+
+    var label = norm(a.textContent || "");
+    setActiveByLabel(label);
+    persist(label, kw);
+    applyFilter(kw, label);
+  }, true);
+
+  if (document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", function(){
+      neutralizeFilterChipLinks();
+      restore();
+    });
+  } else {
+    neutralizeFilterChipLinks();
+    restore();
+  }
+})();
+</script>
 <div class="section path" data-ez-module="product-head-breadcrumb/1" module="product_headcategory" data-ez="contents-1i91r5a-1">
 <span>현재 위치</span>
 <ol>
@@ -50,7 +207,7 @@
 </div>
 <div class="display_pc_only">
 <ul class="menuCategory menu">
-<li class="{$selected}" module="product_displaycategory" style="display:{$display};">
+<li class="{$selected}" module="product_displaysubcategory" style="display:{$display};">
 <a class="button" href="{$link_product_list_sub}">{$category_name}
 					<span class="count {$product_count_display|display}">({$product_count})</span></a><a class="iconWrap" href="#none"></a>
 <ul module="product_children">
@@ -220,3 +377,4 @@
 </div><!-- //product_normalpackage -->
 </div>
 <!--#ez="1/1"-->
+</div>
