@@ -1,7 +1,6 @@
 <!--@layout(/layout/basic/layout.html)-->
-<!--@js(/js/module/product/menucategory.js)-->
-<!--@css(/css/module/product/menupackage.css)-->
-<!--@js(/js/custom/product-list-filter.js?v=9)-->
+<!--@js(/js/module/product/menucategory.js?v=20260503c)-->
+<!--@css(/css/module/product/menupackage.css?v=20260503c)-->
 <div class="productListPage">
 <script>
 (function(){
@@ -16,6 +15,58 @@
     if (t.indexOf("a4") !== -1 || t.indexOf("A4") !== -1) return "a4";
     if (t.indexOf("id카드") !== -1 || t.indexOf("ID카드") !== -1) return "id카드";
     return "";
+  }
+
+  /** 공백 제거·소문자화한 라벨로 판별 (탭 텍스트에 (n) 등 붙어도 동작) */
+  function condensedMenuLabel(label){
+    var t = norm(label);
+    try {
+      if (typeof t.normalize === "function") t = t.normalize("NFKC");
+    } catch (err) {}
+    t = t.replace(/[\u200B-\u200D\uFEFF]/g, "");
+    return t.replace(/\s+/g, "").toLowerCase();
+  }
+
+  /**
+   * 구문 필터 (keywordFromLabel 보다 우선)
+   * - UV인쇄·잉크젯인쇄·재전사인쇄: 상품명에 각 토큰이 떨어져 있어도 모두 포함되면 통과 (UV는 대소문자 무시)
+   * - 레이저각인: 상품명에 "레이저각인" 연속 문자열만 인정 (NFKC 등 변형 적용 안 함)
+   */
+  function phraseRuleFromLabel(label){
+    var c = condensedMenuLabel(label);
+    if (c.indexOf("레이저각인") !== -1) return { type: "literalSubstring", needle: "레이저각인" };
+    if (c.indexOf("잉크젯인쇄") !== -1) return { type: "allTokens", tokens: [{ s: "잉크젯", ic: false }, { s: "인쇄", ic: false }] };
+    if (c.indexOf("재전사인쇄") !== -1) return { type: "allTokens", tokens: [{ s: "재전사", ic: false }, { s: "인쇄", ic: false }] };
+    if (c.indexOf("uv인쇄") !== -1) return { type: "allTokens", tokens: [{ s: "uv", ic: true }, { s: "인쇄", ic: false }] };
+    return null;
+  }
+
+  function productMatchesPhraseRule(name, rule){
+    if (!rule) return false;
+    if (rule.type === "literalSubstring") {
+      return norm(name).indexOf(rule.needle) !== -1;
+    }
+    if (rule.type === "allTokens") {
+      var n = norm(name);
+      try {
+        if (typeof n.normalize === "function") n = n.normalize("NFKC");
+      } catch (e2) {}
+      var nl = n.toLowerCase();
+      for (var i = 0; i < rule.tokens.length; i++) {
+        var tok = rule.tokens[i];
+        if (tok.ic) {
+          if (nl.indexOf(tok.s.toLowerCase()) === -1) return false;
+        } else {
+          if (n.indexOf(tok.s) === -1) return false;
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+  function isClientFilterMenuLabel(label){
+    return !!phraseRuleFromLabel(label) || !!keywordFromLabel(label);
   }
 
   function shouldExcludeProduct(categoryLabel, productName){
@@ -56,24 +107,60 @@
     return out;
   }
 
+  function resetProductVisibility(){
+    var items = getAllProductLis();
+    for (var i=0;i<items.length;i++){
+      items[i].style.display = "";
+    }
+  }
+
+  /** PC/모바일: 서버가 찍어 둔 하위탭 selected 제거 → 진입 시 전체 노출과 동일한 UX */
+  function clearMenuTabSelection(){
+    var blocks = [".display_pc_only", ".display_tablet_only"];
+    for (var b=0;b<blocks.length;b++){
+      var lis = document.querySelectorAll(".productListPage " + blocks[b] + " .menuCategory.menu > li");
+      for (var i=0;i<lis.length;i++){
+        if (lis[i] && lis[i].classList) lis[i].classList.remove("selected");
+      }
+    }
+  }
+
   function getProductName(li){
     var a = li && li.querySelector ? li.querySelector(".description .name a") : null;
     return norm(a ? a.textContent : "");
   }
 
-  function setActiveByLabel(label){
-    var t = norm(label);
-    var lis = document.querySelectorAll(".productListPage .menuCategory.menu > li");
-    for (var i=0;i<lis.length;i++){
-      var li = lis[i];
-      if (!li) continue;
-      li.classList.remove("selected");
-      var a = li.querySelector("a.button");
-      if (a && norm(a.textContent) === t) li.classList.add("selected");
-    }
+  function anchorMenuLabel(a){
+    return norm(a && a.textContent ? a.textContent : "");
   }
 
-  function applyFilter(keyword, label){
+  /** 모바일은 하위행이 a.button이 아닌 일반 a — 클릭한 a의 li만 selected */
+  function setActiveMenuItem(anchor){
+    var col = anchor && anchor.closest ? (anchor.closest(".display_tablet_only") || anchor.closest(".display_pc_only")) : null;
+    if (!col) return;
+    var items = col.querySelectorAll(".menuCategory.menu li");
+    for (var i=0;i<items.length;i++){
+      if (items[i] && items[i].classList) items[i].classList.remove("selected");
+    }
+    var hit = anchor.closest("li");
+    if (hit && hit.classList) hit.classList.add("selected");
+  }
+
+  function applyPhraseFilter(label, rule){
+    var items = getAllProductLis();
+    var shown = 0;
+    for (var i=0;i<items.length;i++){
+      var li = items[i];
+      var name = getProductName(li);
+      var ok = productMatchesPhraseRule(name, rule) && !shouldExcludeProduct(label, name);
+      li.style.display = ok ? "" : "none";
+      if (ok) shown++;
+    }
+    /* 구문 필터: 일치 0건이어도 키워드용 폴백(제외만) 금지 — 그렇지 않으면 UV인쇄 등에서 비일치 상품이 다시 노출됨 */
+    return { total: items.length, shown: shown };
+  }
+
+  function applyKeywordFilter(keyword, label){
     var items = getAllProductLis();
     var shown = 0;
     var kw = (keyword||"").toLowerCase();
@@ -105,57 +192,82 @@
       sessionStorage.setItem("productListPageFilterKeyword", kw || "");
     }catch(e){}
   }
-  function restore(){
-    var label = "", kw = "";
-    try{
-      label = sessionStorage.getItem("productListPageFilterLabel") || "";
-      kw = sessionStorage.getItem("productListPageFilterKeyword") || "";
-    }catch(e){}
-    if (!kw) return;
-    setActiveByLabel(label);
-    applyFilter(kw, label);
-  }
 
   function neutralizeFilterChipLinks(){
-    var anchors = document.querySelectorAll(".ec-base-tab.typeMenu .menuCategory.menu > li > a.button");
-    for (var i=0;i<anchors.length;i++){
-      var a = anchors[i];
-      if (!a) continue;
-      var kw = keywordFromLabel(a.textContent || "");
-      if (!kw) continue;
-      if (!a.getAttribute("data-href")) a.setAttribute("data-href", a.getAttribute("href") || "");
-      a.setAttribute("href", "javascript:;");
-      a.setAttribute("role", "button");
+    var cols = document.querySelectorAll(".productListPage .display_pc_only, .productListPage .display_tablet_only");
+    for (var c=0;c<cols.length;c++){
+      var col = cols[c];
+      if (!col || !col.querySelectorAll) continue;
+      var anchors = col.querySelectorAll(".menuCategory.menu a");
+      for (var i=0;i<anchors.length;i++){
+        var a = anchors[i];
+        if (!a || a.classList.contains("iconWrap")) continue;
+        var href = (a.getAttribute("href") || "").trim();
+        if (href === "#none") continue;
+        var lab = anchorMenuLabel(a);
+        if (!isClientFilterMenuLabel(lab)) continue;
+        if (!a.getAttribute("data-href")) a.setAttribute("data-href", href);
+        a.setAttribute("href", "javascript:;");
+        a.setAttribute("role", "button");
+      }
     }
   }
 
-  // Capture click: never navigate, always filter for known chips.
+  function resolveMenuFilterAnchor(target){
+    if (!target || !target.closest) return null;
+    var a =
+      target.closest(".productListPage .display_tablet_only .menuCategory.menu a") ||
+      target.closest(".productListPage .display_pc_only .menuCategory.menu a");
+    if (!a || a.classList.contains("iconWrap")) return null;
+    var href = (a.getAttribute("href") || "").trim();
+    if (href === "#none") return null;
+    return a;
+  }
+
+  // Capture: 모바일 하위 a( .button 아님 ) 포함, 필터 라벨일 때만 차단 + 필터
   document.addEventListener("click", function(e){
-    var target = e.target;
-    if (!target || !target.closest) return;
-    var a = target.closest(".ec-base-tab.typeMenu .menuCategory.menu > li > a.button");
+    var a = resolveMenuFilterAnchor(e.target);
     if (!a) return;
-    var kw = keywordFromLabel(a.textContent || "");
+    var label = anchorMenuLabel(a);
+    var phrase = phraseRuleFromLabel(label);
+    if (phrase) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+      setActiveMenuItem(a);
+      persist(label, "__phrase__");
+      applyPhraseFilter(label, phrase);
+      return;
+    }
+    var kw = keywordFromLabel(label);
     if (!kw) return;
     e.preventDefault();
     e.stopPropagation();
     if (e.stopImmediatePropagation) e.stopImmediatePropagation();
 
-    var label = norm(a.textContent || "");
-    setActiveByLabel(label);
+    setActiveMenuItem(a);
     persist(label, kw);
-    applyFilter(kw, label);
+    applyKeywordFilter(kw, label);
   }, true);
 
-  if (document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", function(){
-      neutralizeFilterChipLinks();
-      restore();
-    });
-  } else {
+  function initListFilterUi(){
     neutralizeFilterChipLinks();
-    restore();
+    resetProductVisibility();
+    clearMenuTabSelection();
   }
+
+  function bootListFilterUi(){
+    initListFilterUi();
+    /* 늦게 붙는 메뉴 링크만 재처리 — 전체 init은 한 번만 (반복 시 사용자가 건 필터가 초기화됨) */
+    window.setTimeout(function(){ neutralizeFilterChipLinks(); }, 50);
+    window.setTimeout(function(){ neutralizeFilterChipLinks(); }, 400);
+  }
+  if (document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", bootListFilterUi);
+  } else {
+    bootListFilterUi();
+  }
+  window.addEventListener("pageshow", initListFilterUi);
 })();
 </script>
 <div class="section path" data-ez-module="product-head-breadcrumb/1" module="product_headcategory" data-ez="contents-1i91r5a-1">
